@@ -1,0 +1,144 @@
+import 'package:flutter/material.dart';
+import 'package:fl_chart/fl_chart.dart';
+
+void main() {
+  runApp(const MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return const MaterialApp(
+      home: HomePage(),
+    );
+  }
+}
+
+class HomePage extends StatefulWidget {
+  const HomePage({Key? key}) : super(key: key);
+
+  @override
+  _HomePageState createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  late int _selectedChartIndex;
+
+  @override
+  void initState() {
+    super.initState();
+    _selectedChartIndex = 0; // Começar com o gráfico de linha
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("Grafico de teste"),
+        centerTitle: true,
+        backgroundColor: Colors.lightBlue[200],
+      ),
+      body: Center(
+        child: AspectRatio(
+          aspectRatio: 2.0,
+          child: Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: _buildChart(),
+          ),
+        ),
+      ),
+      bottomNavigationBar: BottomNavigationBar(
+        backgroundColor: Colors.lightBlue[100],
+        items: const [
+          BottomNavigationBarItem(
+            icon: Icon(Icons.pie_chart),
+            label: 'Gráficos',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.tag_faces_sharp),
+            label: 'Outros',
+          ),
+        ],
+        onTap: (index) {
+          //_showChartOptions(context);
+        },
+      ),
+    );
+  }
+
+  Widget _buildChart() {
+    switch (_selectedChartIndex) {
+      case 0:
+        return LineChart(
+          LineChartData(
+            lineBarsData: [
+              LineChartBarData(
+                // passa ponto que serão ligados por linha
+                show: true,
+                spots: const [
+                  // define as coordenadas dos pontos
+                  FlSpot(0, 5),
+                  FlSpot(1, 3),
+                  FlSpot(2, 7),
+                  FlSpot(3, 2),
+                  FlSpot(4, 6),
+                ],
+
+                gradient: const LinearGradient(
+                  // degrade de cores na linha
+                  colors: [
+                    Colors.blue,
+                    Colors.red,
+                    Colors.purple,
+                  ],
+                  begin: Alignment.bottomCenter, // degrade de baixo para cima
+                  end: Alignment.topCenter,
+                ),
+
+                barWidth: 4, // espessura da linha
+                isCurved: true,
+                curveSmoothness: 0.35,
+                preventCurveOverShooting: false,
+                isStrokeCapRound: true, // pontos iniciais envolvidos pela linha
+
+                aboveBarData: BarAreaData(
+                  show: true, // preenche tudo acima da linha
+                  color: Colors.red.withOpacity(0.2),
+                ),
+
+                belowBarData: BarAreaData(
+                  show: true, // preenche tudo abaixo da linha
+                  color: Colors.blue.withOpacity(0.3),
+                ),
+
+                // dashArray: [10, 10], // linha tracejada.
+
+                shadow: const Shadow(
+                  color: Colors.greenAccent,
+                  blurRadius: 4,
+                ),
+
+                // isStepLineChart: true, // grafico retangular
+              ),
+            ],
+          ),
+        );
+      case 1:
+        return BarChart(
+          BarChartData(
+            barGroups: [
+              BarChartGroupData(x: 0, barRods: [BarChartRodData(toY: 5, color: Colors.amber, width: 20)]),
+              BarChartGroupData(x: 1, barRods: [BarChartRodData(toY: 3, color: Colors.blue, width: 20)]),
+              BarChartGroupData(x: 2, barRods: [BarChartRodData(toY: 7, color: Colors.green, width: 20)]),
+              BarChartGroupData(x: 3, barRods: [BarChartRodData(toY: 2, color: Colors.pink, width: 20)]),
+              BarChartGroupData(x: 4, barRods: [BarChartRodData(toY: 6, color: Colors.orange, width: 20)]),
+            ],
+          ),
+        );
+      default:
+        return Container(); // Caso não seja nenhum desses, retorna um container vazio
+    }
+  }
+}
