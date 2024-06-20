@@ -1,3 +1,5 @@
+// GRAFICOS LADO A LADO - QUASE
+
 import 'package:flutter/material.dart';
 import 'package:fl_chart/fl_chart.dart';
 
@@ -401,45 +403,30 @@ class _HomePageState extends State<HomePage> {
           children: _selectedChartIndexes.asMap().entries.map((entry) {
             int index = entry.key;
             int chartIndex = entry.value;
-            int totalCharts = _selectedChartIndexes.length;
-            bool isOddCharts = totalCharts.isOdd;
-
-            double width = MediaQuery.of(context).size.width;
-            double height = MediaQuery.of(context).size.height;
-
-            if (isOddCharts && (index == totalCharts - 1)) {
-              // impar e ultimo grafico
-              return Container(
-                width: width,
-                height: height,
-                padding: const EdgeInsets.all(16.0),
-                child: _buildChart(chartIndex),
-              );
-            } else {
-              // par
-              width /= 2;
-            }
-
-            return Stack(children: [
-              Container(
-                width: width,
-                height: width / 1.5,
-                padding: const EdgeInsets.all(16.0),
-                child: _buildChart(chartIndex),
-              ),
-              Positioned(
-                top: 10,
-                right: 10,
-                child: IconButton(
-                  icon: const Icon(Icons.remove_circle, color: Colors.red),
-                  onPressed: () {
-                    setState(() {
-                      _selectedChartIndexes.removeAt(index);
-                    });
-                  },
+            int chartsPerRow = (index > 0 && index % 2 == 0) ? 1 : 2;
+            double width = MediaQuery.of(context).size.width / chartsPerRow;
+            return Stack(
+              children: [
+                Container(
+                  width: width,
+                  height: width / 1.5,
+                  padding: const EdgeInsets.all(16.0),
+                  child: _buildChart(chartIndex),
                 ),
-              )
-            ]);
+                Positioned(
+                  top: 10,
+                  right: 10,
+                  child: IconButton(
+                    icon: const Icon(Icons.remove_circle, color: Colors.red),
+                    onPressed: () {
+                      setState(() {
+                        _selectedChartIndexes.removeAt(index);
+                      });
+                    },
+                  ),
+                ),
+              ],
+            );
           }).toList(),
         ),
       ),
@@ -449,7 +436,7 @@ class _HomePageState extends State<HomePage> {
         items: const [
           BottomNavigationBarItem(
             icon: Icon(Icons.pie_chart),
-            label: 'Adicionar Gráficos',
+            label: 'Gráficos',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.add_box),
