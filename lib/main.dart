@@ -96,7 +96,7 @@ class _HomePageState extends State<HomePage> {
 
     _showOptionsDialog(context, "Opções de Gráficos", chartOptions, (int index) {
       setState(() {
-        if (_selectedChartIndexes.length < 8) {
+        if (_selectedChartIndexes.length < 9) {
           _selectedChartIndexes.add(index);
         }
       });
@@ -389,11 +389,98 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    // Calcula o número de gráficos por linha com base na largura da tela
+    double screenWidth = MediaQuery.of(context).size.width;
+    double screenHeight = MediaQuery.of(context).size.height;
+    int quantidadeDeGraficos = _selectedChartIndexes.length;
+
+    int chartsPerRow;
+    double chartWidth;
+    double chartHeight = screenHeight / 1.5;
+
+    // Definindo a quantidade de gráficos por linha baseado na largura da tela
+    if (screenWidth > 1200) {
+      chartsPerRow = 3;
+    } else if (screenWidth > 800) {
+      chartsPerRow = 2;
+    } else {
+      chartsPerRow = 1;
+    }
+
+    // Calculando a largura do gráfico
+    chartWidth = screenWidth / ((quantidadeDeGraficos < chartsPerRow) ? quantidadeDeGraficos : chartsPerRow);
+
     return Scaffold(
       appBar: AppBar(
         title: const Text("Graficos - Exemplos"),
         centerTitle: true,
         backgroundColor: Colors.lightBlue[200],
+        // leading: IconButton(
+        //   tooltip: "Fecha a janela",
+        //   icon: Icon(Icons.arrow_back_rounded, color: FCoresBasicas().branco),
+        //   onPressed: () {
+        //     if (FConfig().bJanelaTravar) {
+        //       FConfig().bJanelaTravar = false;
+        //       return;
+        //     }
+        //     FNavigator().pop();
+        //   },
+        // ),
+        actions: [
+          // Visibility(
+          //   visible: FConfig().contarPaginas() > 3,
+          //   child: IconButton(
+          //       tooltip: "Retorna para uma janela anterior específica",
+          //       icon: Icon(Icons.arrow_circle_left_outlined, color: FCoresBasicas().branco),
+          //       onPressed: () {
+          //         if (FConfig().bJanelaTravar) {
+          //           return;
+          //         }
+          //         FConfig().removerVariasPaginas();
+          //       }),
+          // ),
+          Visibility(
+            visible: true,
+            child: IconButton(
+                tooltip: "Adiciona um novo painel",
+                // icon: Icon(Icons.add_rounded, color: FCoresBasicas().branco),
+                icon: const Icon(Icons.add_rounded, color: Colors.white),
+                onPressed: () async {
+                  // if (FConfig().bJanelaTravar) {
+                  //   return;
+                  // }
+                  // FConfig().bJanelaTravar = true;
+
+                  // if (index == 0) {
+                  //   _showChartOptions(context);
+                  // } else if ([1, 2, 3].contains(index)) {
+                  //   _showCampoOptions(context);
+                  // } else if (index == 4) {
+                  //   setState(() {
+                  //     showGrid = !showGrid;
+                  //   });
+                  // }
+
+                  // FConfig().bJanelaTravar = false;
+                }),
+          ),
+          // Tooltip(
+          //   message: "Exibe o menu de opções individuais",
+          //   child: InkWell(
+          //     customBorder: const CircleBorder(),
+          //     onTapDown: (details) => tapPosition = FFields().getTapPosition(details),
+          //     onTap: () async {
+          //       if (FConfig().bJanelaTravar) {
+          //         return;
+          //       }
+          //     },
+          //     child: Padding(
+          //       padding: edgeIAll5,
+          //       child: Icon(Icons.more_vert_rounded, color: FCoresBasicas().branco),
+          //     ),
+          //   ),
+          // ),
+        ],
       ),
       body: SingleChildScrollView(
         child: Wrap(
@@ -401,29 +488,11 @@ class _HomePageState extends State<HomePage> {
           children: _selectedChartIndexes.asMap().entries.map((entry) {
             int index = entry.key;
             int chartIndex = entry.value;
-            int totalCharts = _selectedChartIndexes.length;
-            bool isOddCharts = totalCharts.isOdd;
-
-            double width = MediaQuery.of(context).size.width;
-            double height = MediaQuery.of(context).size.height;
-
-            if (isOddCharts && (index == totalCharts - 1)) {
-              // impar e ultimo grafico
-              return Container(
-                width: width,
-                height: height,
-                padding: const EdgeInsets.all(16.0),
-                child: _buildChart(chartIndex),
-              );
-            } else {
-              // par
-              width /= 2;
-            }
 
             return Stack(children: [
               Container(
-                width: width,
-                height: width / 1.5,
+                width: chartWidth,
+                height: chartHeight,
                 padding: const EdgeInsets.all(16.0),
                 child: _buildChart(chartIndex),
               ),
