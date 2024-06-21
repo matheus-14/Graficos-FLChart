@@ -389,7 +389,6 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    // Calcula o número de gráficos por linha com base na largura da tela
     double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
     int quantidadeDeGraficos = _selectedChartIndexes.length;
@@ -410,144 +409,133 @@ class _HomePageState extends State<HomePage> {
     // Calculando a largura do gráfico
     chartWidth = screenWidth / ((quantidadeDeGraficos < chartsPerRow) ? quantidadeDeGraficos : chartsPerRow);
 
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text("Graficos - Exemplos"),
-        centerTitle: true,
-        backgroundColor: Colors.lightBlue[200],
-        // leading: IconButton(
-        //   tooltip: "Fecha a janela",
-        //   icon: Icon(Icons.arrow_back_rounded, color: FCoresBasicas().branco),
-        //   onPressed: () {
-        //     if (FConfig().bJanelaTravar) {
-        //       FConfig().bJanelaTravar = false;
-        //       return;
-        //     }
-        //     FNavigator().pop();
-        //   },
-        // ),
-        actions: [
-          // Visibility(
-          //   visible: FConfig().contarPaginas() > 3,
-          //   child: IconButton(
-          //       tooltip: "Retorna para uma janela anterior específica",
-          //       icon: Icon(Icons.arrow_circle_left_outlined, color: FCoresBasicas().branco),
-          //       onPressed: () {
-          //         if (FConfig().bJanelaTravar) {
-          //           return;
-          //         }
-          //         FConfig().removerVariasPaginas();
-          //       }),
+    return SafeArea(
+      top: true,
+      child: Scaffold(
+        appBar: AppBar(
+          title: const Text("Graficos - Exemplos"),
+          centerTitle: true,
+          backgroundColor: Colors.lightBlue[200],
+          // leading: IconButton(
+          //   tooltip: "Fecha a janela",
+          //   icon: Icon(Icons.arrow_back_rounded, color: FCoresBasicas().branco),
+          //   onPressed: () {
+          //     if (FConfig().bJanelaTravar) {
+          //       FConfig().bJanelaTravar = false;
+          //       return;
+          //     }
+          //     FNavigator().pop();
+          //   },
           // ),
-          Visibility(
-            visible: true,
-            child: IconButton(
-                tooltip: "Adiciona um novo painel",
-                // icon: Icon(Icons.add_rounded, color: FCoresBasicas().branco),
-                icon: const Icon(Icons.add_rounded, color: Colors.white),
-                onPressed: () async {
-                  // if (FConfig().bJanelaTravar) {
-                  //   return;
-                  // }
-                  // FConfig().bJanelaTravar = true;
+          actions: [
+            // Visibility(
+            //   visible: FConfig().contarPaginas() > 3,
+            //   child: IconButton(
+            //       tooltip: "Retorna para uma janela anterior específica",
+            //       icon: Icon(Icons.arrow_circle_left_outlined, color: FCoresBasicas().branco),
+            //       onPressed: () {
+            //         if (FConfig().bJanelaTravar) {
+            //           return;
+            //         }
+            //         FConfig().removerVariasPaginas();
+            //       }),
+            // ),
+            Visibility(
+              visible: true,
+              child: IconButton(
+                  tooltip: "Adiciona um novo painel",
+                  // icon: Icon(Icons.add_rounded, color: FCoresBasicas().branco),
+                  icon: const Icon(Icons.add_rounded, color: Colors.white),
+                  onPressed: () async {
+                    // if (FConfig().bJanelaTravar) {
+                    //   return;
+                    // }
+                    // FConfig().bJanelaTravar = true;
 
-                  // if (index == 0) {
-                  //   _showChartOptions(context);
-                  // } else if ([1, 2, 3].contains(index)) {
-                  //   _showCampoOptions(context);
-                  // } else if (index == 4) {
-                  //   setState(() {
-                  //     showGrid = !showGrid;
-                  //   });
-                  // }
+                    _showChartOptions(context);
 
-                  // FConfig().bJanelaTravar = false;
-                }),
-          ),
-          // Tooltip(
-          //   message: "Exibe o menu de opções individuais",
-          //   child: InkWell(
-          //     customBorder: const CircleBorder(),
-          //     onTapDown: (details) => tapPosition = FFields().getTapPosition(details),
-          //     onTap: () async {
-          //       if (FConfig().bJanelaTravar) {
-          //         return;
-          //       }
-          //     },
-          //     child: Padding(
-          //       padding: edgeIAll5,
-          //       child: Icon(Icons.more_vert_rounded, color: FCoresBasicas().branco),
-          //     ),
-          //   ),
-          // ),
-        ],
-      ),
-      body: SingleChildScrollView(
-        child: Wrap(
-          alignment: WrapAlignment.center,
-          children: _selectedChartIndexes.asMap().entries.map((entry) {
-            int index = entry.key;
-            int chartIndex = entry.value;
-
-            return Stack(children: [
-              Container(
-                width: chartWidth,
-                height: chartHeight,
-                padding: const EdgeInsets.all(16.0),
-                child: _buildChart(chartIndex),
-              ),
-              Positioned(
-                top: 10,
-                right: 10,
-                child: IconButton(
-                  icon: const Icon(Icons.remove_circle, color: Colors.red),
-                  onPressed: () {
-                    setState(() {
-                      _selectedChartIndexes.removeAt(index);
-                    });
-                  },
-                ),
-              )
-            ]);
-          }).toList(),
+                    // FConfig().bJanelaTravar = false;
+                  }),
+            ),
+            // Tooltip(
+            //   message: "Exibe o menu de opções individuais",
+            //   child: InkWell(
+            //     customBorder: const CircleBorder(),
+            //     onTapDown: (details) => tapPosition = FFields().getTapPosition(details),
+            //     onTap: () async {
+            //       if (FConfig().bJanelaTravar) {
+            //         return;
+            //       }
+            //     },
+            //     child: Padding(
+            //       padding: edgeIAll5,
+            //       child: Icon(Icons.more_vert_rounded, color: FCoresBasicas().branco),
+            //     ),
+            //   ),
+            // ),
+          ],
         ),
-      ),
-      bottomNavigationBar: BottomNavigationBar(
-        backgroundColor: Colors.lightBlue[100],
-        type: BottomNavigationBarType.fixed,
-        items: const [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.pie_chart),
-            label: 'Adicionar Gráficos',
+        body: SingleChildScrollView(
+          child: Wrap(
+            alignment: WrapAlignment.center,
+            children: _selectedChartIndexes.asMap().entries.map((entry) {
+              int index = entry.key;
+              int chartIndex = entry.value;
+
+              return Stack(children: [
+                Container(
+                  width: chartWidth,
+                  height: chartHeight,
+                  padding: const EdgeInsets.all(16.0),
+                  child: _buildChart(chartIndex),
+                ),
+                Positioned(
+                  top: 10,
+                  right: 10,
+                  child: IconButton(
+                    icon: const Icon(Icons.remove_circle, color: Colors.red),
+                    onPressed: () {
+                      setState(() {
+                        _selectedChartIndexes.removeAt(index);
+                      });
+                    },
+                  ),
+                )
+              ]);
+            }).toList(),
           ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.add_box),
-            label: 'Campo 1',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.add_box),
-            label: 'Campo 2',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.add_box),
-            label: 'Campo 3',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.grid_on_sharp),
-            label: 'Grade',
-          ),
-        ],
-        onTap: (index) {
-          if (index == 0) {
-            _showChartOptions(context);
-          } else if ([1, 2, 3].contains(index)) {
-            _showCampoOptions(context);
-          } else if (index == 4) {
-            setState(() {
-              showGrid = !showGrid;
-            });
-          }
-        },
+        ),
+        bottomNavigationBar: BottomNavigationBar(
+          backgroundColor: Colors.lightBlue[100],
+          type: BottomNavigationBarType.fixed,
+          items: const [
+            BottomNavigationBarItem(
+              icon: Icon(Icons.add_box),
+              label: 'Campo 1',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.add_box),
+              label: 'Campo 2',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.add_box),
+              label: 'Campo 3',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.grid_on_sharp),
+              label: 'Grade',
+            ),
+          ],
+          onTap: (index) {
+            if ([0, 1, 2].contains(index)) {
+              _showCampoOptions(context);
+            } else if (index == 3) {
+              setState(() {
+                showGrid = !showGrid;
+              });
+            }
+          },
+        ),
       ),
     );
   }
