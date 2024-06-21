@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:fl_chart/fl_chart.dart';
 
@@ -119,6 +121,48 @@ class _HomePageState extends State<HomePage> {
         //_selectedCampotIndex = index;   // tratar ordernar por campo1 campo2 e campo3
       });
     });
+  }
+
+  void _showExpandedChart(BuildContext context, int chartIndex) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return Dialog(
+          child: Container(
+            width: MediaQuery.of(context).size.width,
+            height: MediaQuery.of(context).size.height,
+            padding: const EdgeInsets.all(16.0),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    IconButton(
+                      icon: const Icon(Icons.close),
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                      },
+                    ),
+                  ],
+                ),
+                Text(
+                  'Gráfico $chartIndex Ampliado',
+                  style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                ),
+                const SizedBox(height: 20),
+                Expanded(
+                  child: Center(
+                    child: _buildChart(chartIndex), // Mostra o gráfico ampliado
+                  ),
+                ),
+              ],
+            ),
+          ),
+        );
+      },
+    );
   }
 
   Widget _buildChart(int index) {
@@ -397,8 +441,11 @@ class _HomePageState extends State<HomePage> {
     double chartWidth;
     double chartHeight = screenHeight / 1.5;
 
+    // int chartsPerRow;
+    // double chartSize;
+
     // Definindo a quantidade de gráficos por linha baseado na largura da tela
-    if (screenWidth > 1200) {
+    if (screenWidth > 1300) {
       chartsPerRow = 3;
     } else if (screenWidth > 800) {
       chartsPerRow = 2;
@@ -406,8 +453,12 @@ class _HomePageState extends State<HomePage> {
       chartsPerRow = 1;
     }
 
-    // Calculando a largura do gráfico
     chartWidth = screenWidth / ((quantidadeDeGraficos < chartsPerRow) ? quantidadeDeGraficos : chartsPerRow);
+
+    // Calculando o tamanho do gráfico (quadrado)
+    // double maxWidth = screenWidth / chartsPerRow;
+    // double maxHeight = screenHeight / 1.5;
+    // chartSize = min(maxWidth, maxHeight);
 
     return SafeArea(
       top: true,
@@ -445,7 +496,7 @@ class _HomePageState extends State<HomePage> {
               child: IconButton(
                   tooltip: "Adiciona um novo painel",
                   // icon: Icon(Icons.add_rounded, color: FCoresBasicas().branco),
-                  icon: const Icon(Icons.add_rounded, color: Colors.white),
+                  icon: const Icon(Icons.add_rounded, color: Colors.black),
                   onPressed: () async {
                     // if (FConfig().bJanelaTravar) {
                     //   return;
@@ -481,27 +532,33 @@ class _HomePageState extends State<HomePage> {
             children: _selectedChartIndexes.asMap().entries.map((entry) {
               int index = entry.key;
               int chartIndex = entry.value;
-
-              return Stack(children: [
-                Container(
-                  width: chartWidth,
-                  height: chartHeight,
-                  padding: const EdgeInsets.all(16.0),
-                  child: _buildChart(chartIndex),
-                ),
-                Positioned(
-                  top: 10,
-                  right: 10,
-                  child: IconButton(
-                    icon: const Icon(Icons.remove_circle, color: Colors.red),
-                    onPressed: () {
-                      setState(() {
-                        _selectedChartIndexes.removeAt(index);
-                      });
-                    },
+              return GestureDetector(
+                onDoubleTap: () {
+                  _showExpandedChart(context, chartIndex);
+                },
+                child: Stack(children: [
+                  Container(
+                    width: chartWidth,
+                    height: chartHeight,
+                    // width: chartSize,
+                    // height: chartSize,
+                    padding: const EdgeInsets.all(16.0),
+                    child: _buildChart(chartIndex),
                   ),
-                )
-              ]);
+                  Positioned(
+                    top: 10,
+                    right: 10,
+                    child: IconButton(
+                      icon: const Icon(Icons.remove_circle, color: Colors.red),
+                      onPressed: () {
+                        setState(() {
+                          _selectedChartIndexes.removeAt(index);
+                        });
+                      },
+                    ),
+                  )
+                ]),
+              );
             }).toList(),
           ),
         ),
