@@ -1,5 +1,6 @@
-import 'dart:math';
+// import 'dart:math';
 
+import 'package:fl_chart_test/graficoExpandido.dart';
 import 'package:flutter/material.dart';
 import 'package:fl_chart/fl_chart.dart';
 
@@ -14,6 +15,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return const MaterialApp(
       debugShowCheckedModeBanner: false,
+      // themeMode: ThemeMode.system,
       home: HomePage(),
     );
   }
@@ -27,7 +29,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  final List<int> _selectedChartIndexes = [];
+  final List<int> _selectedes = [];
   bool showGrid = true;
 
   @override
@@ -48,7 +50,7 @@ class _HomePageState extends State<HomePage> {
                 ...options.asMap().entries.map((entry) {
                   int index = entry.key;
                   String optionText = entry.value;
-                  return _buildOption(context, optionText, index, onTapCallback);
+                  return buildOption(context, optionText, index, onTapCallback);
                 }),
                 const SizedBox(height: 10),
                 ElevatedButton(
@@ -65,7 +67,7 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  Widget _buildOption(BuildContext context, String optionText, int index, Function(int) onTapCallback) {
+  Widget buildOption(BuildContext context, String optionText, int index, Function(int) onTapCallback) {
     return ListTile(
       title: Text(optionText),
       onTap: () {
@@ -98,8 +100,8 @@ class _HomePageState extends State<HomePage> {
 
     _showOptionsDialog(context, "Opções de Gráficos", chartOptions, (int index) {
       setState(() {
-        if (_selectedChartIndexes.length < 9) {
-          _selectedChartIndexes.add(index);
+        if (_selectedes.length < 9) {
+          _selectedes.add(index);
         }
       });
     });
@@ -123,56 +125,56 @@ class _HomePageState extends State<HomePage> {
     });
   }
 
-  void _showExpandedChart(BuildContext context, int chartIndex) {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return Dialog(
-          child: Container(
-            width: MediaQuery.of(context).size.width,
-            height: MediaQuery.of(context).size.height,
-            padding: const EdgeInsets.all(16.0),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    IconButton(
-                      icon: const Icon(Icons.close),
-                      onPressed: () {
-                        Navigator.of(context).pop();
-                      },
-                    ),
-                  ],
-                ),
-                Text(
-                  'Gráfico $chartIndex Ampliado',
-                  style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-                ),
-                const SizedBox(height: 20),
-                Expanded(
-                  child: Center(
-                    child: _buildChart(chartIndex), // Mostra o gráfico ampliado
-                  ),
-                ),
-              ],
-            ),
-          ),
-        );
-      },
-    );
-  }
+  // void _showExpandedChart(BuildContext context, int) {
+  //   showDialog(
+  //     context: context,
+  //     builder: (BuildContext context) {
+  //       return Dialog(
+  //         child: Container(
+  //           width: MediaQuery.of(context).size.width,
+  //           height: MediaQuery.of(context).size.height,
+  //           padding: const EdgeInsets.all(16.0),
+  //           child: Column(
+  //             mainAxisAlignment: MainAxisAlignment.center,
+  //             crossAxisAlignment: CrossAxisAlignment.center,
+  //             children: [
+  //               Row(
+  //                 mainAxisAlignment: MainAxisAlignment.end,
+  //                 children: [
+  //                   IconButton(
+  //                     icon: const Icon(Icons.close),
+  //                     onPressed: () {
+  //                       Navigator.of(context).pop();
+  //                     },
+  //                   ),
+  //                 ],
+  //               ),
+  //               const Text(
+  //                 'Gráfico Ampliado',
+  //                 style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+  //               ),
+  //               const SizedBox(height: 20),
+  //               Expanded(
+  //                 child: Center(
+  //                   child: _buildChart(), // Mostra o gráfico ampliado
+  //                 ),
+  //               ),
+  //             ],
+  //           ),
+  //         ),
+  //       );
+  //     },
+  //   );
+  // }
 
-  Widget _buildChart(int index) {
-    List<FlSpot> pontos = const [
+  Widget buildChart(int index) {
+    List<FlSpot> listaPontos = const [
       FlSpot(0, 5),
       FlSpot(1, 3),
       FlSpot(2, 7),
       FlSpot(3, 1.5),
       FlSpot(4, 5.5),
-      FlSpot(5, 7.5),
+      FlSpot(5, 17.5),
     ];
 
     List<BarChartGroupData>? barrasColunas = [
@@ -207,23 +209,19 @@ class _HomePageState extends State<HomePage> {
       case 0: //  Linhas
         return LineChart(
           LineChartData(
-            minX: 0,
-            minY: 0,
-            maxY: 8,
+            // minX: 0,
+            // maxY: 8,
+            // minY: 0,
             gridData: gridData,
             lineBarsData: [
               LineChartBarData(
                 show: true,
-                spots: pontos,
+                spots: listaPontos,
                 gradient: cores,
                 barWidth: 4,
                 isCurved: false,
                 curveSmoothness: 0.35,
                 isStrokeCapRound: true,
-                shadow: const Shadow(
-                  color: Colors.greenAccent,
-                  blurRadius: 4,
-                ),
               ),
             ],
           ),
@@ -231,14 +229,14 @@ class _HomePageState extends State<HomePage> {
       case 2: // Area
         return LineChart(
           LineChartData(
-            minX: 0,
-            minY: 0,
+            // minX: 0,
+            // minY: 0,
+            // maxY: 8,
             gridData: gridData,
-            maxY: 8,
             lineBarsData: [
               LineChartBarData(
                 show: true,
-                spots: pontos,
+                spots: listaPontos,
                 gradient: cores,
                 barWidth: 4,
                 isCurved: false,
@@ -258,14 +256,14 @@ class _HomePageState extends State<HomePage> {
         );
       case 3: // Area Curva
         return LineChart(LineChartData(
-          minX: 0,
-          minY: 0,
-          maxY: 8,
+          // minX: 0,
+          // minY: 0,
+          // maxY: 8,
           gridData: gridData,
           lineBarsData: [
             LineChartBarData(
               show: true,
-              spots: pontos,
+              spots: listaPontos,
               gradient: cores,
               barWidth: 4,
               isCurved: true,
@@ -280,14 +278,14 @@ class _HomePageState extends State<HomePage> {
         ));
       case 4: // Area em bloco
         return LineChart(LineChartData(
-          minX: 0,
-          minY: 0,
-          maxY: 8,
+          // minX: 0,
+          // minY: 0,
+          // maxY: 8,
           gridData: gridData,
           lineBarsData: [
             LineChartBarData(
               show: true,
-              spots: pontos,
+              spots: listaPontos,
               gradient: cores,
               barWidth: 4,
               isCurved: true,
@@ -304,7 +302,7 @@ class _HomePageState extends State<HomePage> {
       case 7: // Colunas
         return BarChart(
           BarChartData(
-            maxY: 8,
+            // maxY: 8,
             gridData: gridData,
             barGroups: barrasColunas,
           ),
@@ -336,15 +334,7 @@ class _HomePageState extends State<HomePage> {
               sideTitles: SideTitles(showTitles: false),
             ),
           ),
-          gridData: FlGridData(
-            show: true,
-            checkToShowHorizontalLine: (value) => value % 10 == 0,
-            getDrawingHorizontalLine: (value) => FlLine(
-              color: Colors.amber.withOpacity(0.1),
-              strokeWidth: 1,
-            ),
-            drawVerticalLine: false,
-          ),
+          gridData: gridData,
           borderData: FlBorderData(
             show: false,
           ),
@@ -362,14 +352,14 @@ class _HomePageState extends State<HomePage> {
       case 13: // Linhas Curvas
         return LineChart(
           LineChartData(
-            minX: 0,
-            minY: 0,
-            maxY: 8,
+            // minX: 0,
+            // minY: 0,
+            // maxY: 8,
             gridData: gridData,
             lineBarsData: [
               LineChartBarData(
                 show: true,
-                spots: pontos,
+                spots: listaPontos,
                 gradient: cores,
                 barWidth: 4,
                 isCurved: true,
@@ -385,13 +375,13 @@ class _HomePageState extends State<HomePage> {
         );
       case 14: // Linhas em Bloco
         return LineChart(LineChartData(
-          minY: 0,
-          maxY: 8,
+          // minY: 0,
+          // maxY: 8,
           gridData: gridData,
           lineBarsData: [
             LineChartBarData(
               show: true,
-              spots: pontos,
+              spots: listaPontos,
               gradient: cores,
               barWidth: 4,
               isCurved: true,
@@ -433,32 +423,48 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    double screenWidth = MediaQuery.of(context).size.width;
-    double screenHeight = MediaQuery.of(context).size.height;
-    int quantidadeDeGraficos = _selectedChartIndexes.length;
+    double dBarrasHV = 150;
+    double dWrapEspacamento = 10;
+    double dScreenWidth = MediaQuery.of(context).size.width;
+    double dScreenHeight = MediaQuery.of(context).size.height;
+    int iQuantidadeDeGraficos = _selectedes.length;
 
-    int chartsPerRow;
-    double chartWidth;
-    double chartHeight = screenHeight / 1.5;
-
-    // int chartsPerRow;
-    // double chartSize;
+    int iGraficosPorLinha, iGraficosPorColuna;
+    double dGraficoLargura;
+    double dGraficoAltura = dScreenHeight / 1.0;
 
     // Definindo a quantidade de gráficos por linha baseado na largura da tela
-    if (screenWidth > 1300) {
-      chartsPerRow = 3;
-    } else if (screenWidth > 800) {
-      chartsPerRow = 2;
+    if (dScreenWidth > 1300) {
+      iGraficosPorLinha = 3;
+    } else if (dScreenWidth > 800) {
+      iGraficosPorLinha = 2;
     } else {
-      chartsPerRow = 1;
+      iGraficosPorLinha = 1;
     }
 
-    chartWidth = screenWidth / ((quantidadeDeGraficos < chartsPerRow) ? quantidadeDeGraficos : chartsPerRow);
+    if (dScreenHeight > 1300) {
+      iGraficosPorColuna = 3;
+    } else if (dScreenHeight > 800) {
+      iGraficosPorColuna = 2;
+    } else {
+      iGraficosPorColuna = 1;
+    }
 
-    // Calculando o tamanho do gráfico (quadrado)
-    // double maxWidth = screenWidth / chartsPerRow;
-    // double maxHeight = screenHeight / 1.5;
-    // chartSize = min(maxWidth, maxHeight);
+    if (iQuantidadeDeGraficos <= iGraficosPorLinha) {
+      iGraficosPorLinha = iQuantidadeDeGraficos;
+      if (iQuantidadeDeGraficos < iGraficosPorColuna * iGraficosPorLinha) {
+        iGraficosPorColuna -= 1;
+      }
+    }
+    if (iQuantidadeDeGraficos <= iGraficosPorColuna) {
+      iGraficosPorColuna = 1;
+    }
+    if (iQuantidadeDeGraficos < iGraficosPorColuna * iGraficosPorLinha) {
+      iGraficosPorLinha -= 1;
+    }
+
+    dGraficoLargura = (dScreenWidth - (iGraficosPorLinha * dWrapEspacamento)) / iGraficosPorLinha;
+    dGraficoAltura = (dScreenHeight - (dBarrasHV + iGraficosPorColuna * dWrapEspacamento)) / iGraficosPorColuna;
 
     return SafeArea(
       top: true,
@@ -528,22 +534,21 @@ class _HomePageState extends State<HomePage> {
         ),
         body: SingleChildScrollView(
           child: Wrap(
+            spacing: dWrapEspacamento,
             alignment: WrapAlignment.center,
-            children: _selectedChartIndexes.asMap().entries.map((entry) {
+            children: _selectedes.asMap().entries.map((entry) {
               int index = entry.key;
               int chartIndex = entry.value;
               return GestureDetector(
-                onDoubleTap: () {
-                  _showExpandedChart(context, chartIndex);
+                onDoubleTap: () async {
+                  await Navigator.push(context, MaterialPageRoute(builder: (context) => GraficoExpandido(chartIndex)));
+                  // _showExpandedChart(context, );
                 },
                 child: Stack(children: [
-                  Container(
-                    width: chartWidth,
-                    height: chartHeight,
-                    // width: chartSize,
-                    // height: chartSize,
-                    padding: const EdgeInsets.all(16.0),
-                    child: _buildChart(chartIndex),
+                  SizedBox(
+                    width: dGraficoLargura,
+                    height: dGraficoAltura,
+                    child: buildChart(chartIndex),
                   ),
                   Positioned(
                     top: 10,
@@ -552,11 +557,11 @@ class _HomePageState extends State<HomePage> {
                       icon: const Icon(Icons.remove_circle, color: Colors.red),
                       onPressed: () {
                         setState(() {
-                          _selectedChartIndexes.removeAt(index);
+                          _selectedes.removeAt(index);
                         });
                       },
                     ),
-                  )
+                  ),
                 ]),
               );
             }).toList(),
