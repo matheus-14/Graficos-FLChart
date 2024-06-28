@@ -3,7 +3,6 @@
 import 'package:fl_chart_test/graficoExpandido.dart';
 import 'package:flutter/material.dart';
 import 'package:fl_chart/fl_chart.dart';
-import 'construirGraficos.dart';
 
 void main() {
   runApp(const MyApp());
@@ -168,7 +167,7 @@ class _HomePageState extends State<HomePage> {
   //   );
   // }
 
-  Widget buildChart(int iIndex) {
+  Widget buildChart(int index) {
     List<FlSpot> listaPontos = const [
       FlSpot(0, 5),
       FlSpot(1, 3),
@@ -178,11 +177,247 @@ class _HomePageState extends State<HomePage> {
       FlSpot(5, 17.5),
     ];
 
+    List<BarChartGroupData>? barrasColunas = [
+      BarChartGroupData(x: 0, barRods: [
+        BarChartRodData(
+          toY: 5,
+          color: Colors.amber,
+          width: 20,
+        )
+      ]),
+      BarChartGroupData(x: 1, barRods: [BarChartRodData(toY: 3, color: Colors.blue, width: 20)]),
+      BarChartGroupData(x: 2, barRods: [BarChartRodData(toY: 7, color: Colors.green, width: 20)]),
+      BarChartGroupData(x: 3, barRods: [BarChartRodData(toY: 2, color: Colors.pink, width: 20)]),
+      BarChartGroupData(x: 4, barRods: [BarChartRodData(toY: 6, color: Colors.orange, width: 20)]),
+    ];
+
+    Gradient? cores = const LinearGradient(
+      colors: [
+        Color.fromARGB(255, 70, 167, 247),
+        Color.fromARGB(255, 230, 79, 68),
+        Colors.purple,
+      ],
+      begin: Alignment.bottomCenter,
+      end: Alignment.topCenter,
+    );
+
     FlGridData gridData = FlGridData(
       show: showGrid,
     );
 
-    return ConstruirGraficos().controllerGrafico(iIndex, listaPontos, gridData);
+    switch (index) {
+      case 0: //  Linhas
+        return LineChart(
+          LineChartData(
+            // minX: 0,
+            // maxY: 8,
+            // minY: 0,
+            gridData: gridData,
+            lineBarsData: [
+              LineChartBarData(
+                show: true,
+                spots: listaPontos,
+                gradient: cores,
+                barWidth: 4,
+                isCurved: false,
+                isStrokeCapRound: true,
+              ),
+            ],
+          ),
+        );
+      case 2: // Area
+        return LineChart(
+          LineChartData(
+            // minX: 0,
+            // minY: 0,
+            // maxY: 8,
+            gridData: gridData,
+            lineBarsData: [
+              LineChartBarData(
+                show: true,
+                spots: listaPontos,
+                gradient: cores,
+                barWidth: 4,
+                isCurved: false,
+                curveSmoothness: 0.35,
+                isStrokeCapRound: true,
+                belowBarData: BarAreaData(
+                  show: true,
+                  color: Colors.blue.withOpacity(0.3),
+                ),
+                shadow: const Shadow(
+                  color: Colors.greenAccent,
+                  blurRadius: 4,
+                ),
+              ),
+            ],
+          ),
+        );
+      case 3: // Area Curva
+        return LineChart(LineChartData(
+          // minX: 0,
+          // minY: 0,
+          // maxY: 8,
+          gridData: gridData,
+          lineBarsData: [
+            LineChartBarData(
+              show: true,
+              spots: listaPontos,
+              gradient: cores,
+              barWidth: 4,
+              isCurved: true,
+              curveSmoothness: 0.35,
+              isStrokeCapRound: true,
+              belowBarData: BarAreaData(
+                show: true,
+                color: Colors.blue.withOpacity(0.3),
+              ),
+            ),
+          ],
+        ));
+      case 4: // Area em bloco
+        return LineChart(LineChartData(
+          // minX: 0,
+          // minY: 0,
+          // maxY: 8,
+          gridData: gridData,
+          lineBarsData: [
+            LineChartBarData(
+              show: true,
+              spots: listaPontos,
+              gradient: cores,
+              barWidth: 4,
+              isCurved: true,
+              curveSmoothness: 0.35,
+              isStrokeCapRound: true,
+              isStepLineChart: true,
+              belowBarData: BarAreaData(
+                show: true,
+                color: Colors.blue.withOpacity(0.3),
+              ),
+            ),
+          ],
+        ));
+      case 7: // Colunas
+        return BarChart(
+          BarChartData(
+            // maxY: 8,
+            gridData: gridData,
+            barGroups: barrasColunas,
+          ),
+        );
+      case 8: // Colunas empilhadas
+        return BarChart(BarChartData(
+          alignment: BarChartAlignment.center,
+          barTouchData: BarTouchData(
+            enabled: false,
+          ),
+          titlesData: const FlTitlesData(
+            show: true,
+            bottomTitles: AxisTitles(
+              sideTitles: SideTitles(
+                showTitles: true,
+                reservedSize: 28,
+              ),
+            ),
+            leftTitles: AxisTitles(
+              sideTitles: SideTitles(
+                showTitles: true,
+                reservedSize: 40,
+              ),
+            ),
+            topTitles: AxisTitles(
+              sideTitles: SideTitles(showTitles: false),
+            ),
+            rightTitles: AxisTitles(
+              sideTitles: SideTitles(showTitles: false),
+            ),
+          ),
+          gridData: gridData,
+          borderData: FlBorderData(
+            show: false,
+          ),
+        ));
+      case 10: // Barras
+        return RotatedBox(
+          quarterTurns: 1,
+          child: BarChart(
+            BarChartData(
+              gridData: gridData,
+              barGroups: barrasColunas,
+            ),
+          ),
+        );
+      case 13: // Linhas Curvas
+        return LineChart(
+          LineChartData(
+            // minX: 0,
+            // minY: 0,
+            // maxY: 8,
+            gridData: gridData,
+            lineBarsData: [
+              LineChartBarData(
+                show: true,
+                spots: listaPontos,
+                gradient: cores,
+                barWidth: 4,
+                isCurved: true,
+                curveSmoothness: 0.35,
+                isStrokeCapRound: true,
+                shadow: const Shadow(
+                  color: Colors.greenAccent,
+                  blurRadius: 4,
+                ),
+              ),
+            ],
+          ),
+        );
+      case 14: // Linhas em Bloco
+        return LineChart(LineChartData(
+          // minY: 0,
+          // maxY: 8,
+          gridData: gridData,
+          lineBarsData: [
+            LineChartBarData(
+              show: true,
+              spots: listaPontos,
+              gradient: cores,
+              barWidth: 4,
+              isCurved: true,
+              curveSmoothness: 0.35,
+              isStrokeCapRound: true,
+              isStepLineChart: true,
+            ),
+          ],
+        ));
+      case 15: // Pizza
+        return PieChart(
+          PieChartData(
+            sections: [
+              PieChartSectionData(value: 10, color: Colors.amber, radius: 250),
+              PieChartSectionData(value: 20, color: Colors.blue, radius: 250),
+              PieChartSectionData(value: 30, color: Colors.green, radius: 250),
+              PieChartSectionData(value: 40, color: Colors.pink, radius: 250),
+            ],
+            centerSpaceRadius: 0,
+          ),
+        );
+      case 16: // Rosca
+        return PieChart(
+          PieChartData(
+            sections: [
+              PieChartSectionData(value: 10, color: Colors.amber, radius: 70),
+              PieChartSectionData(value: 20, color: Colors.blue, radius: 70),
+              PieChartSectionData(value: 30, color: Colors.green, radius: 70),
+              PieChartSectionData(value: 40, color: Colors.pink, radius: 70),
+            ],
+            centerSpaceRadius: 150,
+            centerSpaceColor: Colors.black12,
+          ),
+        );
+      default:
+        return Container(); // retorna um container vazio
+    }
   }
 
   @override
@@ -301,18 +536,18 @@ class _HomePageState extends State<HomePage> {
             spacing: dWrapEspacamento,
             alignment: WrapAlignment.center,
             children: _selectedes.asMap().entries.map((entry) {
-              int iIndex = entry.key;
-              int iChartIndex = entry.value;
+              int index = entry.key;
+              int chartIndex = entry.value;
               return GestureDetector(
                 onDoubleTap: () async {
-                  await Navigator.push(context, MaterialPageRoute(builder: (context) => GraficoExpandido(iChartIndex)));
+                  await Navigator.push(context, MaterialPageRoute(builder: (context) => GraficoExpandido(chartIndex)));
                   // _showExpandedChart(context, );
                 },
                 child: Stack(children: [
                   SizedBox(
                     width: dGraficoLargura,
                     height: dGraficoAltura,
-                    child: buildChart(iChartIndex),
+                    child: buildChart(chartIndex),
                   ),
                   Positioned(
                     top: 10,
@@ -321,7 +556,7 @@ class _HomePageState extends State<HomePage> {
                       icon: const Icon(Icons.remove_circle, color: Colors.red),
                       onPressed: () {
                         setState(() {
-                          _selectedes.removeAt(iIndex);
+                          _selectedes.removeAt(index);
                         });
                       },
                     ),
