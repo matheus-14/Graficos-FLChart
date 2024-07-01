@@ -16,7 +16,6 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return const MaterialApp(
       debugShowCheckedModeBanner: false,
-      // themeMode: ThemeMode.system,
       home: HomePage(),
     );
   }
@@ -96,7 +95,9 @@ class _HomePageState extends State<HomePage> {
       "Linhas curvas",
       "Linhas em bloco",
       "Pizza",
-      "Rosca"
+      "Rosca",
+      "Dispersão",
+      "Radar"
     ];
 
     _showOptionsDialog(context, "Opções de Gráficos", chartOptions, (int index) {
@@ -175,7 +176,7 @@ class _HomePageState extends State<HomePage> {
       FlSpot(2, 7),
       FlSpot(3, 1.5),
       FlSpot(4, 5.5),
-      FlSpot(5, 17.5),
+      FlSpot(5, 3.5),
     ];
 
     FlGridData gridData = FlGridData(

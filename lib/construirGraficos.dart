@@ -10,24 +10,218 @@ class ConstruirGraficos {
       Color.fromARGB(255, 230, 79, 68),
       Colors.purple,
     ],
-    begin: Alignment.bottomCenter,
-    end: Alignment.topCenter,
+    begin: Alignment.centerLeft,
+    end: Alignment.centerRight,
   );
 
   Color areaColor = Colors.cyan.withOpacity(0.3);
 
   List<BarChartGroupData>? barrasColunas = [
-    BarChartGroupData(x: 0, barRods: [
-      BarChartRodData(
-        toY: 5,
-        color: Colors.amber,
-        width: 20,
-      )
-    ]),
-    BarChartGroupData(x: 1, barRods: [BarChartRodData(toY: 3, color: Colors.blue, width: 20)]),
-    BarChartGroupData(x: 2, barRods: [BarChartRodData(toY: 7, color: Colors.green, width: 20)]),
-    BarChartGroupData(x: 3, barRods: [BarChartRodData(toY: 2, color: Colors.pink, width: 20)]),
-    BarChartGroupData(x: 4, barRods: [BarChartRodData(toY: 6, color: Colors.orange, width: 20)]),
+    BarChartGroupData(x: 0, barRods: [BarChartRodData(toY: 5, color: const Color.fromARGB(255, 21, 93, 153), width: 40, borderRadius: BorderRadius.zero)]),
+    BarChartGroupData(x: 1, barRods: [BarChartRodData(toY: 3, color: Colors.blue, width: 40, borderRadius: BorderRadius.zero)]),
+    BarChartGroupData(x: 2, barRods: [BarChartRodData(toY: 7, color: const Color.fromARGB(255, 1, 144, 163), width: 40, borderRadius: BorderRadius.zero)]),
+    BarChartGroupData(x: 3, barRods: [BarChartRodData(toY: 2, color: Colors.cyan, width: 40, borderRadius: BorderRadius.zero)]),
+    BarChartGroupData(x: 4, barRods: [BarChartRodData(toY: 6, color: const Color.fromARGB(255, 169, 236, 245), width: 40, borderRadius: BorderRadius.zero)]),
+  ];
+
+  List<RadarDataSet>? listaRadarSets = [
+    RadarDataSet(
+      fillColor: Colors.blue.withOpacity(0.4),
+      borderColor: Colors.blue,
+      entryRadius: 4,
+      dataEntries: [
+        const RadarEntry(value: 2),
+        const RadarEntry(value: 3),
+        const RadarEntry(value: 4),
+        const RadarEntry(value: 5),
+        const RadarEntry(value: 1),
+      ],
+    ),
+    RadarDataSet(
+      fillColor: Colors.yellow.withOpacity(0.4),
+      borderColor: Colors.yellow,
+      entryRadius: 2,
+      dataEntries: [
+        const RadarEntry(value: 5),
+        const RadarEntry(value: 2),
+        const RadarEntry(value: 2),
+        const RadarEntry(value: 1),
+        const RadarEntry(value: 4),
+      ],
+    ),
+  ];
+
+  List<ScatterSpot> listaDispersaoPontos = [
+    ScatterSpot(
+      2,
+      3,
+      show: true,
+      dotPainter: FlDotCirclePainter(
+        radius: 20,
+        color: Colors.red,
+        strokeWidth: 2,
+        strokeColor: Colors.black,
+      ),
+    ),
+    ScatterSpot(
+      4,
+      5,
+      show: true,
+      dotPainter: FlDotCirclePainter(
+        radius: 60,
+        color: Colors.blue,
+        strokeWidth: 2,
+        strokeColor: Colors.black,
+      ),
+    ),
+    ScatterSpot(
+      6,
+      7,
+      show: true,
+      dotPainter: FlDotCirclePainter(
+        radius: 8,
+        color: Colors.green,
+        strokeWidth: 2,
+        strokeColor: Colors.black,
+      ),
+    ),
+    ScatterSpot(
+      8,
+      9,
+      show: true,
+      dotPainter: FlDotCirclePainter(
+        radius: 5,
+        color: Colors.orange,
+        strokeWidth: 2,
+        strokeColor: Colors.black,
+      ),
+    ),
+    ScatterSpot(
+      1,
+      2,
+      show: true,
+      dotPainter: FlDotCirclePainter(
+        radius: 7,
+        color: Colors.purple,
+        strokeWidth: 2,
+        strokeColor: Colors.black,
+      ),
+    ),
+  ];
+
+  List<BarChartGroupData> listaBarraEmpilhada = [
+    BarChartGroupData(
+      x: 0,
+      barsSpace: 5,
+      barRods: [
+        BarChartRodData(
+          toY: 17000,
+          rodStackItems: [
+            BarChartRodStackItem(0, 2000, const Color.fromARGB(255, 21, 93, 153)),
+            BarChartRodStackItem(2000, 12000, Colors.cyan),
+            BarChartRodStackItem(12000, 17000, const Color.fromARGB(255, 169, 236, 245)),
+          ],
+          borderRadius: BorderRadius.zero,
+          width: 15,
+        ),
+        BarChartRodData(
+          toY: 24000,
+          rodStackItems: [
+            BarChartRodStackItem(0, 13000, const Color.fromARGB(255, 21, 93, 153)),
+            BarChartRodStackItem(13000, 14000, Colors.cyan),
+            BarChartRodStackItem(14000, 24000, const Color.fromARGB(255, 169, 236, 245)),
+          ],
+          borderRadius: BorderRadius.zero,
+          width: 15,
+        ),
+        BarChartRodData(
+          toY: 23000.5,
+          rodStackItems: [
+            BarChartRodStackItem(0, 6000.5, const Color.fromARGB(255, 21, 93, 153)),
+            BarChartRodStackItem(6000.5, 18000, Colors.cyan),
+            BarChartRodStackItem(18000, 23000.5, const Color.fromARGB(255, 169, 236, 245)),
+          ],
+          borderRadius: BorderRadius.zero,
+          width: 15,
+        ),
+        BarChartRodData(
+          toY: 29000,
+          rodStackItems: [
+            BarChartRodStackItem(0, 9000, const Color.fromARGB(255, 21, 93, 153)),
+            BarChartRodStackItem(9000, 15000, Colors.cyan),
+            BarChartRodStackItem(15000, 29000, const Color.fromARGB(255, 169, 236, 245)),
+          ],
+          borderRadius: BorderRadius.zero,
+          width: 15,
+        ),
+        BarChartRodData(
+          toY: 32000,
+          rodStackItems: [
+            BarChartRodStackItem(0, 2000.5, const Color.fromARGB(255, 21, 93, 153)),
+            BarChartRodStackItem(2000.5, 17000.5, Colors.cyan),
+            BarChartRodStackItem(17000.5, 32000, const Color.fromARGB(255, 169, 236, 245)),
+          ],
+          borderRadius: BorderRadius.zero,
+          width: 15,
+        ),
+      ],
+    ),
+    BarChartGroupData(
+      x: 1,
+      barsSpace: 5,
+      barRods: [
+        BarChartRodData(
+          toY: 31000,
+          rodStackItems: [
+            BarChartRodStackItem(0, 11000, const Color.fromARGB(255, 21, 93, 153)),
+            BarChartRodStackItem(11000, 18000, Colors.cyan),
+            BarChartRodStackItem(18000, 31000, const Color.fromARGB(255, 169, 236, 245)),
+          ],
+          borderRadius: BorderRadius.zero,
+          width: 15,
+        ),
+        BarChartRodData(
+          toY: 35000,
+          rodStackItems: [
+            BarChartRodStackItem(0, 14000, const Color.fromARGB(255, 21, 93, 153)),
+            BarChartRodStackItem(14000, 27000, Colors.cyan),
+            BarChartRodStackItem(27000, 35000, const Color.fromARGB(255, 169, 236, 245)),
+          ],
+          borderRadius: BorderRadius.zero,
+          width: 15,
+        ),
+        BarChartRodData(
+          toY: 31000,
+          rodStackItems: [
+            BarChartRodStackItem(0, 8000, const Color.fromARGB(255, 21, 93, 153)),
+            BarChartRodStackItem(8000, 24000, Colors.cyan),
+            BarChartRodStackItem(24000, 31000, const Color.fromARGB(255, 169, 236, 245)),
+          ],
+          borderRadius: BorderRadius.zero,
+          width: 15,
+        ),
+        BarChartRodData(
+          toY: 15000,
+          rodStackItems: [
+            BarChartRodStackItem(0, 6000.5, const Color.fromARGB(255, 21, 93, 153)),
+            BarChartRodStackItem(6000.5, 12000.5, Colors.cyan),
+            BarChartRodStackItem(12000.5, 15000, const Color.fromARGB(255, 169, 236, 245)),
+          ],
+          borderRadius: BorderRadius.zero,
+          width: 15,
+        ),
+        BarChartRodData(
+          toY: 17000,
+          rodStackItems: [
+            BarChartRodStackItem(0, 9000, const Color.fromARGB(255, 21, 93, 153)),
+            BarChartRodStackItem(9000, 15000, Colors.cyan),
+            BarChartRodStackItem(15000, 17000, const Color.fromARGB(255, 169, 236, 245)),
+          ],
+          borderRadius: BorderRadius.zero,
+          width: 15,
+        ),
+      ],
+    ),
   ];
 
   // Linhas, Area, Area Curva, Area em bloco, Linhas Curvas, Linhas em bloco
@@ -40,7 +234,7 @@ class ConstruirGraficos {
             show: true,
             spots: listaPontos,
             gradient: cores,
-            barWidth: 4,
+            barWidth: 5,
             isCurved: bIsCurved,
             isStrokeCapRound: true,
             isStepLineChart: bIsStep,
@@ -53,47 +247,13 @@ class ConstruirGraficos {
           ),
         ],
       ),
+      duration: const Duration(milliseconds: 1000),
+      curve: Curves.easeInToLinear,
     );
   }
 
-  // Widget construirGraficoBarrasEmpilhadas(FlGridData gridData) {
-  //   return BarChart(
-  //     BarChartData(
-  //       alignment: BarChartAlignment.center,
-  //       barTouchData: BarTouchData(
-  //         enabled: false,
-  //       ),
-  //       titlesData: const FlTitlesData(
-  //         show: true,
-  //         bottomTitles: AxisTitles(
-  //           sideTitles: SideTitles(
-  //             showTitles: true,
-  //             reservedSize: 28,
-  //           ),
-  //         ),
-  //         leftTitles: AxisTitles(
-  //           sideTitles: SideTitles(
-  //             showTitles: true,
-  //             reservedSize: 40,
-  //           ),
-  //         ),
-  //         topTitles: AxisTitles(
-  //           sideTitles: SideTitles(showTitles: false),
-  //         ),
-  //         rightTitles: AxisTitles(
-  //           sideTitles: SideTitles(showTitles: false),
-  //         ),
-  //       ),
-  //       gridData: gridData,
-  //       borderData: FlBorderData(
-  //         show: false,
-  //       ),
-  //     ),
-  //   );
-  // }
-
-  // Barras, Colunas
-  Widget construirGraficoBarras(FlGridData gridData, List<BarChartGroupData>? listaBarras, bool bIsColunas) {
+  // Barras, Colunas, Empilhadas
+  Widget construirGraficoBarras(FlGridData gridData, List<BarChartGroupData>? listaBarras, bool bIsColunas, bool bIsEmpilhada) {
     int barraOuColuna = bIsColunas ? 0 : 1;
 
     return RotatedBox(
@@ -103,6 +263,8 @@ class ConstruirGraficos {
           gridData: gridData,
           barGroups: listaBarras,
         ),
+        swapAnimationDuration: const Duration(milliseconds: 1000),
+        swapAnimationCurve: Curves.decelerate,
       ),
     );
   }
@@ -122,7 +284,84 @@ class ConstruirGraficos {
         centerSpaceRadius: dEspacoCentro,
         centerSpaceColor: Colors.black12,
       ),
+      swapAnimationDuration: const Duration(milliseconds: 500),
+      swapAnimationCurve: Curves.decelerate,
     );
+  }
+
+  // Radar
+  Widget construirGraficoRadar() {
+    return RadarChart(
+      RadarChartData(
+        dataSets: listaRadarSets,
+        radarTouchData: RadarTouchData(enabled: true),
+        // radarBackgroundColor: Colors.grey,
+        // radarShape: RadarShape.polygon,
+        // radarBorderData: const BorderSide(color: Colors.pink, width: 4),
+
+        titlePositionPercentageOffset: 0.05,
+        titleTextStyle: const TextStyle(color: Colors.black, fontSize: 14),
+        getTitle: (index, angle) {
+          switch (index) {
+            case 0:
+              return RadarChartTitle(text: 'AAAAAA', angle: angle);
+            case 1:
+              return RadarChartTitle(text: 'BBBBBB', angle: angle);
+            case 2:
+              return RadarChartTitle(text: 'CCCCCC', angle: angle);
+            case 3:
+              return RadarChartTitle(text: 'DDDDDD', angle: angle);
+            case 4:
+              return RadarChartTitle(text: 'EEEEEE', angle: angle);
+            default:
+              return const RadarChartTitle(text: '');
+          }
+        },
+        tickCount: 5,
+        ticksTextStyle: const TextStyle(color: Colors.grey, fontSize: 10),
+        tickBorderData: const BorderSide(color: Colors.black),
+        gridBorderData: const BorderSide(color: Colors.pink),
+      ),
+    );
+  }
+
+  // Dispersão
+  Widget construirGraficoDispersao() {
+    return ScatterChart(ScatterChartData(
+      scatterSpots: listaDispersaoPontos,
+      minX: 0,
+      maxX: 10,
+      minY: 0,
+      maxY: 10,
+      borderData: FlBorderData(
+        show: true,
+        border: Border.all(color: Colors.black, width: 1),
+      ),
+      gridData: FlGridData(
+        show: true,
+        drawHorizontalLine: true,
+        getDrawingHorizontalLine: (value) => const FlLine(
+          color: Colors.grey,
+          strokeWidth: 1,
+        ),
+        drawVerticalLine: true,
+        getDrawingVerticalLine: (value) => const FlLine(
+          color: Colors.grey,
+          strokeWidth: 1,
+        ),
+      ),
+      titlesData: const FlTitlesData(
+        show: true,
+        bottomTitles: AxisTitles(
+          axisNameWidget: Text('X Axis'),
+          sideTitles: SideTitles(showTitles: true),
+        ),
+        leftTitles: AxisTitles(
+          axisNameWidget: Text('Y Axis'),
+          sideTitles: SideTitles(showTitles: true),
+        ),
+      ),
+    ));
   }
 
   Widget controllerGrafico(int iIndex, List<FlSpot> listaPontos, FlGridData gridData) {
@@ -136,9 +375,13 @@ class ConstruirGraficos {
       case 4: // Area em bloco
         return construirGraficoLinhas(listaPontos, gridData, false, true, true);
       case 7: // Colunas
-        return construirGraficoBarras(gridData, barrasColunas, true);
+        return construirGraficoBarras(gridData, barrasColunas, true, false);
+      case 8: // Coluna empilhada
+        return construirGraficoBarras(gridData, listaBarraEmpilhada, true, true);
       case 10: // Barras
-        return construirGraficoBarras(gridData, barrasColunas, false);
+        return construirGraficoBarras(gridData, barrasColunas, false, true);
+      case 11: // Barras empilhadas
+        return construirGraficoBarras(gridData, listaBarraEmpilhada, false, true);
       case 13: // Linhas Curvas
         return construirGraficoLinhas(listaPontos, gridData, true, false, false);
       case 14: // Linhas em Bloco
@@ -147,6 +390,10 @@ class ConstruirGraficos {
         return construirGraficoPizza(250, false);
       case 16: // Rosca
         return construirGraficoPizza(70, true);
+      case 17: // Dispersão
+        return construirGraficoDispersao();
+      case 18: // Radar
+        return construirGraficoRadar();
       default:
         return const Center(child: Text("Gráfico indisponível"));
     }
