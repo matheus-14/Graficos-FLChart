@@ -1,0 +1,186 @@
+*** GRAFICO LINHA ***
+
+- lista de linhas
+- Escala X 
+- Escala Y
+- Subtipo
+- Curva
+- Degrau
+- Grid
+- Area
+- Espessura da linha
+- Cor GBY 1, 2, 3, 4
+- Mostrar titulos
+- Posicao dos titulos
+- Posicao legenda
+- Borda
+- Cor de fundo
+- Sombra na linha
+- Cor de sombra na linha
+- Animaçoes
+
+Map<String, dynamic> linhaMap = {
+  'lista de linhas': [], // Lista de objetos representando cada linha
+  'Escala X': '', // Tipo de escala no eixo X
+  'Escala Y': '', // Tipo de escala no eixo Y
+  'Subtipo': '', // Subtipo do gráfico (se houver)
+  'Curva': false, // Opção para desenhar curvas nas linhas
+  'Degrau': false, // Opção para desenhar linhas em degrau
+  'Grid': false, // Exibir grade no gráfico
+  'Area': false, // Preencher área abaixo das linhas
+  'Espessura da linha': 1.0, // Espessura das linhas do gráfico
+  'Cor GBY 1': Colors.blue, // Cores das linhas
+  'Cor GBY 2': Colors.green,
+  'Cor GBY 3': Colors.yellow,
+  'Cor GBY 4': Colors.red,
+  'Mostrar titulos': true, // Exibir títulos no gráfico
+  'Posicao dos titulos': 'top', // Posição dos títulos no gráfico
+  'Posicao legenda': 'bottom', // Posição da legenda do gráfico
+  'Borda': true, // Exibir borda no gráfico
+  'Cor de fundo': Colors.white, // Cor de fundo do gráfico
+  'Sombra na linha': true, // Exibir sombra nas linhas
+  'Cor de sombra na linha': Colors.grey, // Cor da sombra nas linhas
+  'Animações': true, // Ativar animações no gráfico
+};
+
+----------------------------------------------------------------------
+
+*** GRAFICO BARRA ***
+
+- Lista de barras	
+- Cor de cada barra
+- Espessura da barra
+- Tamanho de cada barra
+- Espaço entre as barras
+- Empilhada ou nao
+- Alinhamento 
+- Mostrar titulos
+- Posicao dos titulos
+- Cor de fundo		
+- Grid
+- Touch tooltip
+- Posicao do tooltip
+- Animações
+
+Map<String, dynamic> barrasMap = {
+  'Lista de barras': [], // Lista de objetos representando cada barra
+  'Cor de cada barra': [], // Cores individuais para cada barra
+  'Espessura da barra': 1.0, // Espessura das barras
+  'Tamanho de cada barra': 'auto', // Tamanho das barras ('auto' ou definido)
+  'Espaço entre as barras': 4.0, // Espaço entre as barras
+  'Empilhada': false, // Barras empilhadas ou não
+  'Alinhamento': 'center', // Alinhamento das barras
+  'Mostrar titulos': true, // Exibir títulos no gráfico
+  'Posicao dos titulos': 'top', // Posição dos títulos no gráfico
+  'Cor de fundo': Colors.white, // Cor de fundo do gráfico
+  'Grid': true, // Exibir grade no gráfico
+  'Touch tooltip': true, // Ativar tooltips interativos
+  'Posicao do tooltip': 'top', // Posição dos tooltips interativos
+  'Animações': true, // Ativar animações no gráfico
+};
+
+----------------------------------------------------------------------
+
+*** GRAFICO PIZZA ***
+
+- Lista de Seções
+- Valor/titulo da seção
+- Estilo do titulo
+- Posicao do titulo na seção
+- Cor da seção
+- Espessura da seção
+- Espaço entre seções
+- Contorno da seção (cor, espessura)
+- Raio de cada seção
+- Raio do vazio central
+- Cor do vazio central
+- Raio maximo
+- Animações
+
+Map<String, dynamic> pizzaMap = {
+  'Lista de Seções': [], // Lista de objetos representando cada seção da pizza
+  'Valor/titulo da seção': '', // Valor ou título de cada seção
+  'Estilo do titulo': TextStyle(), // Estilo do título das seções
+  'Posicao do titulo na seção': 'inside', // Posição do título dentro da seção
+  'Cor da seção': [], // Cores individuais para cada seção
+  'Espessura da seção': 30.0, // Espessura das seções da pizza
+  'Espaço entre seções': 0.0, // Espaço entre as seções da pizza
+  'Contorno da seção': {'cor': Colors.white, 'espessura': 1.0}, // Cor e espessura do contorno das seções
+  'Raio de cada seção': 100.0, // Raio de cada seção da pizza
+  'Raio do vazio central': 0.0, // Raio do vazio central na pizza
+  'Cor do vazio central': Colors.transparent, // Cor do vazio central na pizza
+  'Raio maximo': 150.0, // Raio máximo da pizza
+  'Animações': true, // Ativar animações na pizza
+};
+
+----------------------------------------------------------------------
+
+
+*** GRAFICO DE DISPERSÃO ***
+
+- Escala X 
+- Escala Y
+- Lista de pontos dispersos
+- Raio dos pontos
+- Cor dos pontos
+- Titulo
+- Posicao dos titulos
+- TouchData
+- ToolTip
+- Grid
+- Cor de fundo
+
+Map<String, dynamic> dispersaoMap = {
+  'Escala X': '', // Tipo de escala no eixo X
+  'Escala Y': '', // Tipo de escala no eixo Y
+  'Lista de pontos dispersos': [], // Lista de objetos representando cada ponto
+  'Raio dos pontos': 6.0, // Raio dos pontos no gráfico de dispersão
+  'Cor dos pontos': Colors.blue, // Cor dos pontos no gráfico de dispersão
+  'Titulo': '', // Título do gráfico
+  'Posicao dos titulos': 'top', // Posição do título no gráfico
+  'TouchData': true, // Ativar interação com os dados (toque para informações)
+  'ToolTip': true, // Exibir tooltips interativos
+  'Grid': true, // Exibir grade no gráfico
+  'Cor de fundo': Colors.white, // Cor de fundo do gráfico
+};
+
+----------------------------------------------------------------------
+
+*** GRAFICO DE RADAR ***
+
+- Lista de sets
+	- Cada set tem uma lista de valores
+	- Cor preenchimento de cada set
+	- Cor da borda de cada set
+	- Raio dos pontos que ligam cada set
+- Titulo (estilo, posição, cor)
+	- Distancia dos titulos para a borda do radar
+	- Estilo dos titulos (cor e tamanho da fonte)
+- Cor de fundo
+- Formato (cicular ou polygon)
+- Espessura e cor da borda
+- Quantidade de "tick", niveis
+- Cor e tamanho das descrições dos ticks
+- Cor do grid
+
+Map<String, dynamic> radarMap = {
+  'Lista de sets': [], // Lista de conjuntos de dados para o radar
+  'Cor preenchimento de cada set': [], // Cores de preenchimento para cada conjunto
+  'Cor da borda de cada set': [], // Cores de borda para cada conjunto
+  'Raio dos pontos que ligam cada set': 2.0, // Raio dos pontos que ligam os conjuntos
+  'Titulo': {'texto': '', 'estilo': TextStyle(), 'posicao': 'top'}, // Título do gráfico e suas configurações
+  'Cor de fundo': Colors.white, // Cor de fundo do gráfico
+  'Formato': 'circular', // Formato do gráfico (circular ou poligonal)
+  'Espessura e cor da borda': {'espessura': 1.0, 'cor': Colors.grey}, // Espessura e cor da borda do radar
+  'Quantidade de "tick", niveis': 5, // Quantidade de níveis (ticks) no radar
+  'Cor e tamanho das descrições dos ticks': {'cor': Colors.black, 'tamanho': 12.0}, // Cor e tamanho das descrições dos ticks
+  'Cor do grid': Colors.grey, // Cor do grid no radar
+};
+
+----------------------------------------------------------------------
+
+// "Linhas rápidas",
+// "Área empilhada",
+// "Área empilhada em 100%",
+// "Colunas empilhadas em 100%",
+// "Barras empilhadas em 100%",
