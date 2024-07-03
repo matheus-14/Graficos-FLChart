@@ -1,0 +1,1 @@
+ C:\\Dados\\Outros\ Projetos\\FLChart\\fl_chart_test\\.dart_tool\\flutter_build\\d17a454f59df4ecfcd3713b324da175b\\native_assets.yaml: 
