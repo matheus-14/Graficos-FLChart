@@ -10,6 +10,9 @@ class ColunaEmpilhada extends StatefulWidget {
   final Color dark = AppColors.contentColorCyan.darken(60);
   final Color normal = AppColors.contentColorCyan.darken(30);
   final Color light = AppColors.contentColorCyan;
+  final double bordaReta = 0;
+  final double bordaCurvaturaMedia = 8;
+  final double bordaCurva = 16;
 
   @override
   State<StatefulWidget> createState() => ColunaEmpilhadaState();
@@ -69,8 +72,8 @@ class ColunaEmpilhadaState extends State<ColunaEmpilhada> {
         padding: const EdgeInsets.only(top: 16),
         child: LayoutBuilder(
           builder: (context, constraints) {
-            final barsSpace = constraints.maxWidth / 50;
-            final barsWidth = constraints.maxWidth / 50;
+            final barsSpace = constraints.maxWidth;
+            final barsWidth = constraints.maxWidth / 35;
             return BarChart(
               BarChartData(
                 alignment: BarChartAlignment.center,
@@ -112,7 +115,7 @@ class ColunaEmpilhadaState extends State<ColunaEmpilhada> {
                   show: false,
                 ),
                 groupsSpace: barsSpace,
-                barGroups: getData(barsWidth, barsSpace),
+                barGroups: mainData(barsWidth, barsSpace),
               ),
             );
           },
@@ -121,7 +124,7 @@ class ColunaEmpilhadaState extends State<ColunaEmpilhada> {
     );
   }
 
-  List<BarChartGroupData> getData(double barsWidth, double barsSpace) {
+  List<BarChartGroupData> mainData(double barsWidth, double barsSpace) {
     return [
       BarChartGroupData(
         x: 0,
@@ -134,49 +137,49 @@ class ColunaEmpilhadaState extends State<ColunaEmpilhada> {
               BarChartRodStackItem(2000000000, 12000000000, widget.normal),
               BarChartRodStackItem(12000000000, 17000000000, widget.light),
             ],
-            borderRadius: BorderRadius.zero,
+            borderRadius: BorderRadius.circular(widget.bordaCurvaturaMedia),
             width: barsWidth,
           ),
-          BarChartRodData(
-            toY: 24000000000,
-            rodStackItems: [
-              BarChartRodStackItem(0, 13000000000, widget.dark),
-              BarChartRodStackItem(13000000000, 14000000000, widget.normal),
-              BarChartRodStackItem(14000000000, 24000000000, widget.light),
-            ],
-            borderRadius: BorderRadius.zero,
-            width: barsWidth,
-          ),
-          BarChartRodData(
-            toY: 23000000000.5,
-            rodStackItems: [
-              BarChartRodStackItem(0, 6000000000.5, widget.dark),
-              BarChartRodStackItem(6000000000.5, 18000000000, widget.normal),
-              BarChartRodStackItem(18000000000, 23000000000.5, widget.light),
-            ],
-            borderRadius: BorderRadius.zero,
-            width: barsWidth,
-          ),
-          BarChartRodData(
-            toY: 29000000000,
-            rodStackItems: [
-              BarChartRodStackItem(0, 9000000000, widget.dark),
-              BarChartRodStackItem(9000000000, 15000000000, widget.normal),
-              BarChartRodStackItem(15000000000, 29000000000, widget.light),
-            ],
-            borderRadius: BorderRadius.zero,
-            width: barsWidth,
-          ),
-          BarChartRodData(
-            toY: 32000000000,
-            rodStackItems: [
-              BarChartRodStackItem(0, 2000000000.5, widget.dark),
-              BarChartRodStackItem(2000000000.5, 17000000000.5, widget.normal),
-              BarChartRodStackItem(17000000000.5, 32000000000, widget.light),
-            ],
-            borderRadius: BorderRadius.zero,
-            width: barsWidth,
-          ),
+          // BarChartRodData(
+          //   toY: 24000000000,
+          //   rodStackItems: [
+          //     BarChartRodStackItem(0, 13000000000, widget.dark),
+          //     BarChartRodStackItem(13000000000, 14000000000, widget.normal),
+          //     BarChartRodStackItem(14000000000, 24000000000, widget.light),
+          //   ],
+          //   borderRadius: BorderRadius.circular(widget.bordaCurvaturaMedia),
+          //   width: barsWidth,
+          // ),
+          // BarChartRodData(
+          //   toY: 23000000000.5,
+          //   rodStackItems: [
+          //     BarChartRodStackItem(0, 6000000000.5, widget.dark),
+          //     BarChartRodStackItem(6000000000.5, 18000000000, widget.normal),
+          //     BarChartRodStackItem(18000000000, 23000000000.5, widget.light),
+          //   ],
+          //   borderRadius: BorderRadius.circular(widget.bordaCurvaturaMedia),
+          //   width: barsWidth,
+          // ),
+          // BarChartRodData(
+          //   toY: 29000000000,
+          //   rodStackItems: [
+          //     BarChartRodStackItem(0, 9000000000, widget.dark),
+          //     BarChartRodStackItem(9000000000, 15000000000, widget.normal),
+          //     BarChartRodStackItem(15000000000, 29000000000, widget.light),
+          //   ],
+          //   borderRadius: BorderRadius.circular(widget.bordaCurvaturaMedia),
+          //   width: barsWidth,
+          // ),
+          // BarChartRodData(
+          //   toY: 32000000000,
+          //   rodStackItems: [
+          //     BarChartRodStackItem(0, 2000000000.5, widget.dark),
+          //     BarChartRodStackItem(2000000000.5, 17000000000.5, widget.normal),
+          //     BarChartRodStackItem(17000000000.5, 32000000000, widget.light),
+          //   ],
+          //   borderRadius: BorderRadius.circular(widget.bordaCurvaturaMedia),
+          //   width: barsWidth,
+          // ),
         ],
       ),
       BarChartGroupData(
@@ -190,49 +193,49 @@ class ColunaEmpilhadaState extends State<ColunaEmpilhada> {
               BarChartRodStackItem(11000000000, 18000000000, widget.normal),
               BarChartRodStackItem(18000000000, 31000000000, widget.light),
             ],
-            borderRadius: BorderRadius.zero,
+            borderRadius: BorderRadius.circular(widget.bordaCurvaturaMedia),
             width: barsWidth,
           ),
-          BarChartRodData(
-            toY: 35000000000,
-            rodStackItems: [
-              BarChartRodStackItem(0, 14000000000, widget.dark),
-              BarChartRodStackItem(14000000000, 27000000000, widget.normal),
-              BarChartRodStackItem(27000000000, 35000000000, widget.light),
-            ],
-            borderRadius: BorderRadius.zero,
-            width: barsWidth,
-          ),
-          BarChartRodData(
-            toY: 31000000000,
-            rodStackItems: [
-              BarChartRodStackItem(0, 8000000000, widget.dark),
-              BarChartRodStackItem(8000000000, 24000000000, widget.normal),
-              BarChartRodStackItem(24000000000, 31000000000, widget.light),
-            ],
-            borderRadius: BorderRadius.zero,
-            width: barsWidth,
-          ),
-          BarChartRodData(
-            toY: 15000000000,
-            rodStackItems: [
-              BarChartRodStackItem(0, 6000000000.5, widget.dark),
-              BarChartRodStackItem(6000000000.5, 12000000000.5, widget.normal),
-              BarChartRodStackItem(12000000000.5, 15000000000, widget.light),
-            ],
-            borderRadius: BorderRadius.zero,
-            width: barsWidth,
-          ),
-          BarChartRodData(
-            toY: 17000000000,
-            rodStackItems: [
-              BarChartRodStackItem(0, 9000000000, widget.dark),
-              BarChartRodStackItem(9000000000, 15000000000, widget.normal),
-              BarChartRodStackItem(15000000000, 17000000000, widget.light),
-            ],
-            borderRadius: BorderRadius.zero,
-            width: barsWidth,
-          ),
+          // BarChartRodData(
+          //   toY: 35000000000,
+          //   rodStackItems: [
+          //     BarChartRodStackItem(0, 14000000000, widget.dark),
+          //     BarChartRodStackItem(14000000000, 27000000000, widget.normal),
+          //     BarChartRodStackItem(27000000000, 35000000000, widget.light),
+          //   ],
+          //   borderRadius: BorderRadius.circular(widget.bordaCurvaturaMedia),
+          //   width: barsWidth,
+          // ),
+          // BarChartRodData(
+          //   toY: 31000000000,
+          //   rodStackItems: [
+          //     BarChartRodStackItem(0, 8000000000, widget.dark),
+          //     BarChartRodStackItem(8000000000, 24000000000, widget.normal),
+          //     BarChartRodStackItem(24000000000, 31000000000, widget.light),
+          //   ],
+          //   borderRadius: BorderRadius.circular(widget.bordaCurvaturaMedia),
+          //   width: barsWidth,
+          // ),
+          // BarChartRodData(
+          //   toY: 15000000000,
+          //   rodStackItems: [
+          //     BarChartRodStackItem(0, 6000000000.5, widget.dark),
+          //     BarChartRodStackItem(6000000000.5, 12000000000.5, widget.normal),
+          //     BarChartRodStackItem(12000000000.5, 15000000000, widget.light),
+          //   ],
+          //   borderRadius: BorderRadius.circular(widget.bordaCurvaturaMedia),
+          //   width: barsWidth,
+          // ),
+          // BarChartRodData(
+          //   toY: 17000000000,
+          //   rodStackItems: [
+          //     BarChartRodStackItem(0, 9000000000, widget.dark),
+          //     BarChartRodStackItem(9000000000, 15000000000, widget.normal),
+          //     BarChartRodStackItem(15000000000, 17000000000, widget.light),
+          //   ],
+          //   borderRadius: BorderRadius.circular(widget.bordaCurvaturaMedia),
+          //   width: barsWidth,
+          // ),
         ],
       ),
       BarChartGroupData(
@@ -246,49 +249,49 @@ class ColunaEmpilhadaState extends State<ColunaEmpilhada> {
               BarChartRodStackItem(6000000000, 23000000000, widget.normal),
               BarChartRodStackItem(23000000000, 34000000000, widget.light),
             ],
-            borderRadius: BorderRadius.zero,
+            borderRadius: BorderRadius.circular(widget.bordaCurvaturaMedia),
             width: barsWidth,
           ),
-          BarChartRodData(
-            toY: 32000000000,
-            rodStackItems: [
-              BarChartRodStackItem(0, 7000000000, widget.dark),
-              BarChartRodStackItem(7000000000, 24000000000, widget.normal),
-              BarChartRodStackItem(24000000000, 32000000000, widget.light),
-            ],
-            borderRadius: BorderRadius.zero,
-            width: barsWidth,
-          ),
-          BarChartRodData(
-            toY: 14000000000.5,
-            rodStackItems: [
-              BarChartRodStackItem(0, 1000000000.5, widget.dark),
-              BarChartRodStackItem(1000000000.5, 12000000000, widget.normal),
-              BarChartRodStackItem(12000000000, 14000000000.5, widget.light),
-            ],
-            borderRadius: BorderRadius.zero,
-            width: barsWidth,
-          ),
-          BarChartRodData(
-            toY: 20000000000,
-            rodStackItems: [
-              BarChartRodStackItem(0, 4000000000, widget.dark),
-              BarChartRodStackItem(4000000000, 15000000000, widget.normal),
-              BarChartRodStackItem(15000000000, 20000000000, widget.light),
-            ],
-            borderRadius: BorderRadius.zero,
-            width: barsWidth,
-          ),
-          BarChartRodData(
-            toY: 24000000000,
-            rodStackItems: [
-              BarChartRodStackItem(0, 4000000000, widget.dark),
-              BarChartRodStackItem(4000000000, 15000000000, widget.normal),
-              BarChartRodStackItem(15000000000, 24000000000, widget.light),
-            ],
-            borderRadius: BorderRadius.zero,
-            width: barsWidth,
-          ),
+          // BarChartRodData(
+          //   toY: 32000000000,
+          //   rodStackItems: [
+          //     BarChartRodStackItem(0, 7000000000, widget.dark),
+          //     BarChartRodStackItem(7000000000, 24000000000, widget.normal),
+          //     BarChartRodStackItem(24000000000, 32000000000, widget.light),
+          //   ],
+          //   borderRadius: BorderRadius.circular(widget.bordaCurvaturaMedia),
+          //   width: barsWidth,
+          // ),
+          // BarChartRodData(
+          //   toY: 14000000000.5,
+          //   rodStackItems: [
+          //     BarChartRodStackItem(0, 1000000000.5, widget.dark),
+          //     BarChartRodStackItem(1000000000.5, 12000000000, widget.normal),
+          //     BarChartRodStackItem(12000000000, 14000000000.5, widget.light),
+          //   ],
+          //   borderRadius: BorderRadius.circular(widget.bordaCurvaturaMedia),
+          //   width: barsWidth,
+          // ),
+          // BarChartRodData(
+          //   toY: 20000000000,
+          //   rodStackItems: [
+          //     BarChartRodStackItem(0, 4000000000, widget.dark),
+          //     BarChartRodStackItem(4000000000, 15000000000, widget.normal),
+          //     BarChartRodStackItem(15000000000, 20000000000, widget.light),
+          //   ],
+          //   borderRadius: BorderRadius.circular(widget.bordaCurvaturaMedia),
+          //   width: barsWidth,
+          // ),
+          // BarChartRodData(
+          //   toY: 24000000000,
+          //   rodStackItems: [
+          //     BarChartRodStackItem(0, 4000000000, widget.dark),
+          //     BarChartRodStackItem(4000000000, 15000000000, widget.normal),
+          //     BarChartRodStackItem(15000000000, 24000000000, widget.light),
+          //   ],
+          //   borderRadius: BorderRadius.circular(widget.bordaCurvaturaMedia),
+          //   width: barsWidth,
+          // ),
         ],
       ),
       BarChartGroupData(
@@ -302,49 +305,49 @@ class ColunaEmpilhadaState extends State<ColunaEmpilhada> {
               BarChartRodStackItem(1000000000.5, 12000000000, widget.normal),
               BarChartRodStackItem(12000000000, 14000000000, widget.light),
             ],
-            borderRadius: BorderRadius.zero,
+            borderRadius: BorderRadius.circular(widget.bordaCurvaturaMedia),
             width: barsWidth,
           ),
-          BarChartRodData(
-            toY: 27000000000,
-            rodStackItems: [
-              BarChartRodStackItem(0, 7000000000, widget.dark),
-              BarChartRodStackItem(7000000000, 25000000000, widget.normal),
-              BarChartRodStackItem(25000000000, 27000000000, widget.light),
-            ],
-            borderRadius: BorderRadius.zero,
-            width: barsWidth,
-          ),
-          BarChartRodData(
-            toY: 29000000000,
-            rodStackItems: [
-              BarChartRodStackItem(0, 6000000000, widget.dark),
-              BarChartRodStackItem(6000000000, 23000000000, widget.normal),
-              BarChartRodStackItem(23000000000, 29000000000, widget.light),
-            ],
-            borderRadius: BorderRadius.zero,
-            width: barsWidth,
-          ),
-          BarChartRodData(
-            toY: 16000000000.5,
-            rodStackItems: [
-              BarChartRodStackItem(0, 9000000000, widget.dark),
-              BarChartRodStackItem(9000000000, 15000000000, widget.normal),
-              BarChartRodStackItem(15000000000, 16000000000.5, widget.light),
-            ],
-            borderRadius: BorderRadius.zero,
-            width: barsWidth,
-          ),
-          BarChartRodData(
-            toY: 15000000000,
-            rodStackItems: [
-              BarChartRodStackItem(0, 7000000000, widget.dark),
-              BarChartRodStackItem(7000000000, 12000000000.5, widget.normal),
-              BarChartRodStackItem(12000000000.5, 15000000000, widget.light),
-            ],
-            borderRadius: BorderRadius.zero,
-            width: barsWidth,
-          ),
+          // BarChartRodData(
+          //   toY: 27000000000,
+          //   rodStackItems: [
+          //     BarChartRodStackItem(0, 7000000000, widget.dark),
+          //     BarChartRodStackItem(7000000000, 25000000000, widget.normal),
+          //     BarChartRodStackItem(25000000000, 27000000000, widget.light),
+          //   ],
+          //   borderRadius: BorderRadius.circular(widget.bordaCurvaturaMedia),
+          //   width: barsWidth,
+          // ),
+          // BarChartRodData(
+          //   toY: 29000000000,
+          //   rodStackItems: [
+          //     BarChartRodStackItem(0, 6000000000, widget.dark),
+          //     BarChartRodStackItem(6000000000, 23000000000, widget.normal),
+          //     BarChartRodStackItem(23000000000, 29000000000, widget.light),
+          //   ],
+          //   borderRadius: BorderRadius.circular(widget.bordaCurvaturaMedia),
+          //   width: barsWidth,
+          // ),
+          // BarChartRodData(
+          //   toY: 16000000000.5,
+          //   rodStackItems: [
+          //     BarChartRodStackItem(0, 9000000000, widget.dark),
+          //     BarChartRodStackItem(9000000000, 15000000000, widget.normal),
+          //     BarChartRodStackItem(15000000000, 16000000000.5, widget.light),
+          //   ],
+          //   borderRadius: BorderRadius.circular(widget.bordaCurvaturaMedia),
+          //   width: barsWidth,
+          // ),
+          // BarChartRodData(
+          //   toY: 15000000000,
+          //   rodStackItems: [
+          //     BarChartRodStackItem(0, 7000000000, widget.dark),
+          //     BarChartRodStackItem(7000000000, 12000000000.5, widget.normal),
+          //     BarChartRodStackItem(12000000000.5, 15000000000, widget.light),
+          //   ],
+          //   borderRadius: BorderRadius.circular(widget.bordaCurvaturaMedia),
+          //   width: barsWidth,
+          // ),
         ],
       ),
     ];

@@ -2,7 +2,7 @@
 
 import 'package:fl_chart_test/ColunaEmpilhada.dart';
 import 'package:fl_chart_test/ColunaGrafico.dart';
-import 'package:fl_chart_test/RadarGrafico.dart';
+import 'package:fl_chart_test/LinhaGrafico.dart';
 import 'package:flutter/material.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'PizzaGrafico.dart';
@@ -238,9 +238,15 @@ class ConstruirGraficos {
             show: true,
             spots: listaPontos,
             gradient: cores,
-            barWidth: 5,
+            barWidth: 15,
             isCurved: bIsCurved,
-            isStrokeCapRound: true,
+            isStrokeCapRound: false,
+            isStrokeJoinRound: true,
+            dotData: FlDotData(
+                show: false,
+                checkToShowDot: (FlSpot listaPontos, LineChartBarData barData) {
+                  return listaPontos.x % 2 == 0;
+                }),
             isStepLineChart: bIsStep,
             preventCurveOverShooting: true,
             belowBarData: bIsArea
@@ -372,16 +378,20 @@ class ConstruirGraficos {
   Widget controllerGrafico(int iIndex, List<FlSpot> listaPontos, FlGridData gridData) {
     switch (iIndex) {
       case 0: // Linhas
-        return construirGraficoLinhas(listaPontos, gridData, false, false, false);
+        // return construirGraficoLinhas(listaPontos, gridData, false, false, false);
+        return LinhaGrafico(listaPontos: listaPontos, gridData: gridData, bIsCurved: false, bIsArea: false, bIsStep: false);
       case 2: // Area - reta
-        return construirGraficoLinhas(listaPontos, gridData, false, true, false);
+        // return construirGraficoLinhas(listaPontos, gridData, false, true, false);
+        return LinhaGrafico(listaPontos: listaPontos, gridData: gridData, bIsCurved: false, bIsArea: true, bIsStep: false);
       case 3: // Area curva
-        return construirGraficoLinhas(listaPontos, gridData, true, true, false);
+        // return construirGraficoLinhas(listaPontos, gridData, true, true, false);
+        return LinhaGrafico(listaPontos: listaPontos, gridData: gridData, bIsCurved: true, bIsArea: true, bIsStep: false);
       case 4: // Area em bloco
-        return construirGraficoLinhas(listaPontos, gridData, false, true, true);
+        // return construirGraficoLinhas(listaPontos, gridData, false, true, true);
+        return LinhaGrafico(listaPontos: listaPontos, gridData: gridData, bIsCurved: false, bIsArea: true, bIsStep: true);
       case 7: // Colunas
         // return construirGraficoBarras(gridData, barrasColunas, true, false);
-        return ColunaGrafico();
+        return ColunaGrafico(listaBarras: barrasColunas, mostrarGrid: true, bIsColunas: true, bIsEmpilhada: false);
       case 8: // Coluna empilhada
         // return construirGraficoBarras(gridData, listaBarraEmpilhada, true, true);
         return ColunaEmpilhada();
