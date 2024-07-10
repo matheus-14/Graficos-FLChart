@@ -2,7 +2,11 @@
 
 import 'package:fl_chart_test/ColunaEmpilhada.dart';
 import 'package:fl_chart_test/ColunaGrafico.dart';
+import 'package:fl_chart_test/DispersaoGrafico.dart';
+import 'package:fl_chart_test/FBIPainel.dart';
+import 'package:fl_chart_test/FBIPainelPrincipal.dart';
 import 'package:fl_chart_test/LinhaGrafico.dart';
+import 'package:fl_chart_test/RadarGrafico.dart';
 import 'package:flutter/material.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'PizzaGrafico.dart';
@@ -18,99 +22,12 @@ class ConstruirGraficos {
     end: Alignment.centerRight,
   );
 
-  Color areaColor = Colors.cyan.withOpacity(0.3);
-
   List<BarChartGroupData>? barrasColunas = [
     BarChartGroupData(x: 0, barRods: [BarChartRodData(toY: 5, color: const Color.fromARGB(255, 21, 93, 153), width: 40, borderRadius: BorderRadius.zero)]),
     BarChartGroupData(x: 1, barRods: [BarChartRodData(toY: 3, color: Colors.blue, width: 40, borderRadius: BorderRadius.zero)]),
     BarChartGroupData(x: 2, barRods: [BarChartRodData(toY: 7, color: const Color.fromARGB(255, 1, 144, 163), width: 40, borderRadius: BorderRadius.zero)]),
     BarChartGroupData(x: 3, barRods: [BarChartRodData(toY: 2, color: Colors.cyan, width: 40, borderRadius: BorderRadius.zero)]),
     BarChartGroupData(x: 4, barRods: [BarChartRodData(toY: 6, color: const Color.fromARGB(255, 169, 236, 245), width: 40, borderRadius: BorderRadius.zero)]),
-  ];
-
-  List<RadarDataSet>? listaRadarSets = [
-    RadarDataSet(
-      fillColor: Colors.blue.withOpacity(0.4),
-      borderColor: Colors.blue,
-      entryRadius: 4,
-      dataEntries: [
-        const RadarEntry(value: 2),
-        const RadarEntry(value: 3),
-        const RadarEntry(value: 4),
-        const RadarEntry(value: 5),
-        const RadarEntry(value: 1),
-      ],
-    ),
-    RadarDataSet(
-      fillColor: Colors.yellow.withOpacity(0.4),
-      borderColor: Colors.yellow,
-      entryRadius: 2,
-      dataEntries: [
-        const RadarEntry(value: 5),
-        const RadarEntry(value: 2),
-        const RadarEntry(value: 2),
-        const RadarEntry(value: 1),
-        const RadarEntry(value: 4),
-      ],
-    ),
-  ];
-
-  List<ScatterSpot> listaDispersaoPontos = [
-    ScatterSpot(
-      2,
-      3,
-      show: true,
-      dotPainter: FlDotCirclePainter(
-        radius: 20,
-        color: Colors.red,
-        strokeWidth: 2,
-        strokeColor: Colors.black,
-      ),
-    ),
-    ScatterSpot(
-      4,
-      5,
-      show: true,
-      dotPainter: FlDotCirclePainter(
-        radius: 60,
-        color: Colors.blue,
-        strokeWidth: 2,
-        strokeColor: Colors.black,
-      ),
-    ),
-    ScatterSpot(
-      6,
-      7,
-      show: true,
-      dotPainter: FlDotCirclePainter(
-        radius: 8,
-        color: Colors.green,
-        strokeWidth: 2,
-        strokeColor: Colors.black,
-      ),
-    ),
-    ScatterSpot(
-      8,
-      9,
-      show: true,
-      dotPainter: FlDotCirclePainter(
-        radius: 5,
-        color: Colors.orange,
-        strokeWidth: 2,
-        strokeColor: Colors.black,
-      ),
-    ),
-    ScatterSpot(
-      1,
-      2,
-      show: true,
-      dotPainter: FlDotCirclePainter(
-        radius: 7,
-        color: Colors.purple,
-        strokeWidth: 2,
-        strokeColor: Colors.black,
-      ),
-    ),
   ];
 
   List<BarChartGroupData> listaBarraEmpilhada = [
@@ -252,7 +169,7 @@ class ConstruirGraficos {
             belowBarData: bIsArea
                 ? BarAreaData(
                     show: true,
-                    color: areaColor,
+                    color: Colors.cyan.withOpacity(0.3),
                   )
                 : null,
           ),
@@ -376,46 +293,58 @@ class ConstruirGraficos {
   }
 
   Widget controllerGrafico(int iIndex, List<FlSpot> listaPontos, FlGridData gridData) {
+    // return GraficoConstruir(FBIPainel(iTipoGrafico: iIndex);
     switch (iIndex) {
       case 0: // Linhas
-        // return construirGraficoLinhas(listaPontos, gridData, false, false, false);
         return LinhaGrafico(listaPontos: listaPontos, gridData: gridData, bIsCurved: false, bIsArea: false, bIsStep: false);
-      case 2: // Area - reta
-        // return construirGraficoLinhas(listaPontos, gridData, false, true, false);
-        return LinhaGrafico(listaPontos: listaPontos, gridData: gridData, bIsCurved: false, bIsArea: true, bIsStep: false);
-      case 3: // Area curva
-        // return construirGraficoLinhas(listaPontos, gridData, true, true, false);
-        return LinhaGrafico(listaPontos: listaPontos, gridData: gridData, bIsCurved: true, bIsArea: true, bIsStep: false);
-      case 4: // Area em bloco
-        // return construirGraficoLinhas(listaPontos, gridData, false, true, true);
-        return LinhaGrafico(listaPontos: listaPontos, gridData: gridData, bIsCurved: false, bIsArea: true, bIsStep: true);
-      case 7: // Colunas
-        // return construirGraficoBarras(gridData, barrasColunas, true, false);
-        return ColunaGrafico(listaBarras: barrasColunas, mostrarGrid: true, bIsColunas: true, bIsEmpilhada: false);
-      case 8: // Coluna empilhada
-        // return construirGraficoBarras(gridData, listaBarraEmpilhada, true, true);
-        return ColunaEmpilhada();
-      case 10: // Barras
+      case 1: // Barras
         return construirGraficoBarras(gridData, barrasColunas, false, true);
-      case 11: // Barras empilhadas
-        return construirGraficoBarras(gridData, listaBarraEmpilhada, false, true);
-      case 13: // Linhas Curvas
-        return construirGraficoLinhas(listaPontos, gridData, true, false, false);
-      case 14: // Linhas em Bloco
-        return construirGraficoLinhas(listaPontos, gridData, true, false, true);
-      case 15: // Pizza
-        // return construirGraficoPizza(250, false);
+      case 2: // Pizza
         return const PizzaGrafico(bIsDonut: false);
-      case 16: // Rosca
-        // return construirGraficoPizza(70, true);
-        return const PizzaGrafico(bIsDonut: true);
-      case 17: // Dispersão
-        return construirGraficoDispersao();
-      case 18: // Radar
-        return construirGraficoRadar();
-      // return RadarGrafico();
+      case 3: // Dispersão
+        return DispersaoGrafico(listaDispersaoPontos: listaDispersaoPontos);
+      case 4: // Radar
+        // return construirGraficoRadar();
+        return RadarGrafico(listaRadarSets: listaRadarSets);
       default:
         return const Center(child: Text("Gráfico indisponível"));
     }
+    // switch (iIndex) {
+    //   case 0: // Linhas
+    //     return LinhaGrafico(listaPontos: listaPontos, gridData: gridData, bIsCurved: false, bIsArea: false, bIsStep: false);
+    //   case 2: // Area - reta
+    //     return LinhaGrafico(listaPontos: listaPontos, gridData: gridData, bIsCurved: false, bIsArea: true, bIsStep: false);
+    //   case 3: // Area curva
+    //     return LinhaGrafico(listaPontos: listaPontos, gridData: gridData, bIsCurved: true, bIsArea: true, bIsStep: false);
+    //   case 4: // Area em bloco
+    //     return LinhaGrafico(listaPontos: listaPontos, gridData: gridData, bIsCurved: false, bIsArea: true, bIsStep: true);
+    //   case 7: // Colunas
+    //     return ColunaGrafico(listaBarras: barrasColunas, mostrarGrid: true, bIsColunas: true, bIsEmpilhada: false);
+    //   case 8: // Coluna empilhada
+    //     return ColunaEmpilhada();
+    //   case 10: // Barras
+    //     return construirGraficoBarras(gridData, barrasColunas, false, true);
+    //   case 11: // Barras empilhadas
+    //     return construirGraficoBarras(gridData, listaBarraEmpilhada, false, true);
+    //   case 13: // Linhas Curvas
+    //     return LinhaGrafico(listaPontos: listaPontos, gridData: gridData, bIsCurved: true, bIsArea: false, bIsStep: false);
+    //   case 14: // Linhas em Bloco
+    //     return LinhaGrafico(listaPontos: listaPontos, gridData: gridData, bIsCurved: false, bIsArea: false, bIsStep: true);
+    //   case 15: // Pizza
+    //     return const PizzaGrafico(bIsDonut: false);
+    //   case 16: // Rosca
+    //     return const PizzaGrafico(bIsDonut: true);
+    //   case 17: // Dispersão
+    //     return DispersaoGrafico(
+    //       listaDispersaoPontos: listaDispersaoPontos,
+    //     );
+    //   case 18: // Radar
+    //     // return construirGraficoRadar();
+    //     return RadarGrafico(
+    //       listaRadarSets: listaRadarSets,
+    //     );
+    //   default:
+    //     return const Center(child: Text("Gráfico indisponível"));
+    // }
   }
 }

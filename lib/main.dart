@@ -1,5 +1,6 @@
 // import 'dart:math';
 
+// import 'package:fl_chart_test/CoresAuxiliaresGraficos.dart';
 import 'package:fl_chart_test/graficoExpandido.dart';
 import 'package:flutter/material.dart';
 import 'package:fl_chart/fl_chart.dart';
@@ -87,25 +88,32 @@ class _HomePageState extends State<HomePage> {
   void _showChartOptions(BuildContext context) {
     List<String> chartOptions = [
       "Linhas",
-      "Linhas rápidas",
-      "Área",
-      "Área curva",
-      "Área em bloco",
-      "Área empilhada",
-      "Área empilhada em 100%",
-      "Colunas",
-      "Colunas empilhadas",
-      "Colunas empilhadas em 100%",
       "Barras",
-      "Barras empilhadas",
-      "Barras empilhadas em 100%",
-      "Linhas curvas",
-      "Linhas em bloco",
       "Pizza",
-      "Rosca",
       "Dispersão",
       "Radar"
     ];
+    // List<String> chartOptions = [
+    //   "Linhas",
+    //   "Linhas rápidas",
+    //   "Área",
+    //   "Área curva",
+    //   "Área em bloco",
+    //   "Área empilhada",
+    //   "Área empilhada em 100%",
+    //   "Colunas",
+    //   "Colunas empilhadas",
+    //   "Colunas empilhadas em 100%",
+    //   "Barras",
+    //   "Barras empilhadas",
+    //   "Barras empilhadas em 100%",
+    //   "Linhas curvas",
+    //   "Linhas em bloco",
+    //   "Pizza",
+    //   "Rosca",
+    //   "Dispersão",
+    //   "Radar"
+    // ];
 
     _showOptionsDialog(context, "Opções de Gráficos", chartOptions, (int index) {
       setState(() {
@@ -185,6 +193,14 @@ class _HomePageState extends State<HomePage> {
       FlSpot(4, 5.5),
       FlSpot(5, 3.5),
     ];
+    /*
+  periodos	periodoi	year(dam_cc1)	month(dam_cc1)	vcre	vdeb
+	01/2022	2022/01	2022	1	1756214.77000000	2102036.43000000
+	02/2022	2022/02	2022	2	2172594.74000000	2097763.44000000
+	03/2022	2022/03	2022	3	2337010.86000000	2008713.00000000
+	04/2022	2022/04	2022	4	619953.97000000	577899.39000000
+	05/2022	2022/05	2022	5	447.30000000	0.00000000
+   */
 
     FlGridData gridData = FlGridData(
       show: showGrid,

@@ -13,6 +13,10 @@
 - Mostrar titulos
 - Posicao dos titulos
 - Posicao legenda
+- Cor e estilo do titulo
+- mostrar pontos 
+- Pontos de inicio e fim arredondados ou retos
+- Pontos do meio arredondados ou retos
 - Borda
 - Cor de fundo
 - Sombra na linha
@@ -20,13 +24,13 @@
 - Animaçoes
 
 Map<String, dynamic> linhaMap = {
-  'lista de linhas': [], // Lista de objetos representando cada linha
-  'Escala X': '', // Tipo de escala no eixo X
-  'Escala Y': '', // Tipo de escala no eixo Y
-  'Subtipo': '', // Subtipo do gráfico (se houver)
-  'Curva': false, // Opção para desenhar curvas nas linhas
-  'Degrau': false, // Opção para desenhar linhas em degrau
-  'Grid': false, // Exibir grade no gráfico
+  'lista de linhas': [],
+  'Escala X': '', 
+  'Escala Y': '', 
+  'Subtipo': '', 
+  'Curva': false, 
+  'Degrau': false, 
+  'Grid': false, 
   'Area': false, // Preencher área abaixo das linhas
   'Espessura da linha': 1.0, // Espessura das linhas do gráfico
   'Cor GBY 1': Colors.blue, // Cores das linhas
@@ -34,10 +38,10 @@ Map<String, dynamic> linhaMap = {
   'Cor GBY 3': Colors.yellow,
   'Cor GBY 4': Colors.red,
   'Mostrar titulos': true, // Exibir títulos no gráfico
-  'Posicao dos titulos': 'top', // Posição dos títulos no gráfico
-  'Posicao legenda': 'bottom', // Posição da legenda do gráfico
+  'Posicao dos titulos': 'top', 
+  'Posicao legenda': 'bottom', 
   'Borda': true, // Exibir borda no gráfico
-  'Cor de fundo': Colors.white, // Cor de fundo do gráfico
+  'Cor de fundo': Colors.white, 
   'Sombra na linha': true, // Exibir sombra nas linhas
   'Cor de sombra na linha': Colors.grey, // Cor da sombra nas linhas
   'Animações': true, // Ativar animações no gráfico
@@ -49,10 +53,10 @@ Map<String, dynamic> linhaMap = {
 
 - Lista de barras	
 - Cor de cada barra
-- Espessura da barra
 - Tamanho de cada barra
 - Espaço entre as barras
 - Empilhada ou nao
+- Barra ou coluna
 - Alinhamento 
 - Mostrar titulos
 - Posicao dos titulos
@@ -85,7 +89,6 @@ Map<String, dynamic> barrasMap = {
 
 - Lista de Seções
 - Valor/titulo da seção
-- Estilo do titulo
 - Posicao do titulo na seção
 - Cor da seção
 - Espessura da seção

@@ -50,7 +50,7 @@ class _GraficoExpandidoState extends ConsumerState<GraficoExpandido> {
       FlSpot(2, 7),
       FlSpot(3, 1.5),
       FlSpot(4, 5.5),
-      FlSpot(5, 17.5),
+      FlSpot(5, 3.5),
     ];
 
     return ConstruirGraficos().controllerGrafico(index, listaPontos, const FlGridData(show: true));
@@ -221,11 +221,6 @@ class _GraficoExpandidoState extends ConsumerState<GraficoExpandido> {
                             ),
                           ],
                         ),
-                        const Text(
-                          'Gráfico Ampliado',
-                          style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-                        ),
-                        const SizedBox(height: 20),
                         Expanded(
                           child: Center(
                             child: buildChart(widget.chartIndex), // Mostra o gráfico ampliado

@@ -7,7 +7,29 @@ import 'CoresAuxiliaresGraficos.dart';
 class PizzaGrafico extends StatefulWidget {
   final bool bIsDonut;
 
-  const PizzaGrafico({super.key, required this.bIsDonut});
+  // List<String> lIndicadoresTexto;
+  // List<Color> lIndicadoresCor;
+  // iTamanhoIndicadorNormal;
+  // iTamanhoIndicadorExpandido;
+  // corTextoIndicadorNormal;
+  // corTextoIndicadorExpandido;
+  // // startDegreeOffset
+  // final List<PieChartSectionData> listaDeSecoes;
+  // final String sTituloSecao; // PieChartSectionData, title
+  // final double dPosicaoTituloSecao; // titlePositionPercentageOffset entre 0 e 1
+  // final List<Color> corDaSecao; // PieChartSectionData, color
+  // final double dEspessuraDaSecao; // PieChartSectionData, value
+  // final BorderSide contornoSecao; // BorderSide, width, color
+  // final double dEspacoEntreSecoes; // sectionsSpace
+  // final double dRaioSecao; // raioSecao
+  // final double dRaioCentral; // centerSpaceRadius
+  // final Color corVazioCentral; // centerSpaceColor
+  // final bool bAnimacoes;
+
+  const PizzaGrafico({
+    super.key,
+    required this.bIsDonut,
+  });
 
   @override
   State<StatefulWidget> createState() => PizzaGraficoState();
@@ -73,7 +95,7 @@ class PizzaGraficoState extends State<PizzaGrafico> {
                       });
                     },
                   ),
-                  startDegreeOffset: 180,
+                  startDegreeOffset: 0,
                   borderData: FlBorderData(show: false),
                   sectionsSpace: 4,
                   centerSpaceRadius: widget.bIsDonut ? 50 : 0,

@@ -2,7 +2,7 @@
 
 import 'dart:convert';
 import 'package:json_annotation/json_annotation.dart';
-import '../funcoes/fJson.dart';
+import 'package:fl_chart_test/funcoes/fJson.dart';
 
 part 'FBIPainel.g.dart';
 
@@ -13,47 +13,54 @@ class FBIPainel {
   int iTipoGrafico;
   String sTabela;
   int iDataAgrupar;
-  String sGroupBy1Campo;
-  int iGroupBy1DataOpcao;
-  String sGroupBy2Campo;
-  int iGroupBy2DataOpcao;
-  String sGroupBy3Campo;
-  int iGroupBy3DataOpcao;
-  String sGroupBy4Campo;
-  int iGroupBy4DataOpcao;
+  String? sGroupBy1Campo;
+  int? iGroupBy1DataOpcao;
+  String? sGroupBy2Campo;
+  int? iGroupBy2DataOpcao;
+  String? sGroupBy3Campo;
+  int? iGroupBy3DataOpcao;
+  String? sGroupBy4Campo;
+  int? iGroupBy4DataOpcao;
   String sCamposValor1;
   String sCamposValor2;
   String sCamposValor3;
   String sOrderBy1Campo;
-  int iOrderBy1AscDesc;
-  String sOrderBy2Campo;
-  int iOrderBy2AscDesc;
-  String sOrderBy3Campo;
-  int iOrderBy3AscDesc;
+  int? iOrderBy1AscDesc;
+  String? sOrderBy2Campo;
+  int? iOrderBy2AscDesc;
+  String? sOrderBy3Campo;
+  int? iOrderBy3AscDesc;
+
+  // FBIGraficoGeral oGrafGeral;
+  // FBIGraficoLinha oGrafLinha;
+  // FBIGraficoBarra oGrafBarra;
+  // FBIGraficoPizza oGrafPizza;
+  // FBIGraficoDispersao oGrafDispersao;
+  // FBIGraficoRadar oGrafRadar;
 
   FBIPainel({
     this.sTitulo = "",
     this.sObservacao = "",
-    required this.iTipoGrafico,
+    this.iTipoGrafico = 0,
     this.sTabela = "",
-    required this.iDataAgrupar,
+    this.iDataAgrupar = 0,
     this.sGroupBy1Campo = "",
-    required this.iGroupBy1DataOpcao,
+    this.iGroupBy1DataOpcao,
     this.sGroupBy2Campo = "",
-    required this.iGroupBy2DataOpcao,
+    this.iGroupBy2DataOpcao,
     this.sGroupBy3Campo = "",
-    required this.iGroupBy3DataOpcao,
+    this.iGroupBy3DataOpcao,
     this.sGroupBy4Campo = "",
-    required this.iGroupBy4DataOpcao,
+    this.iGroupBy4DataOpcao,
     this.sCamposValor1 = "",
     this.sCamposValor2 = "",
     this.sCamposValor3 = "",
     this.sOrderBy1Campo = "",
-    required this.iOrderBy1AscDesc,
+    this.iOrderBy1AscDesc,
     this.sOrderBy2Campo = "",
-    required this.iOrderBy2AscDesc,
+    this.iOrderBy2AscDesc,
     this.sOrderBy3Campo = "",
-    required this.iOrderBy3AscDesc,
+    this.iOrderBy3AscDesc,
   });
 
   FBIPainel copyWith({

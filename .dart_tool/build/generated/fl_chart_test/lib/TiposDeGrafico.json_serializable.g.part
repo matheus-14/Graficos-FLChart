@@ -68,23 +68,24 @@ Map<String, dynamic> _$GraficoTipoBarraToJson(GraficoTipoBarra instance) =>
 
 GraficoTipoPizza _$GraficoTipoPizzaFromJson(Map<String, dynamic> json) =>
     GraficoTipoPizza(
+      sTituloSecao: json['sTituloSecao'] as String,
       dPosicaoTituloSecao: (json['dPosicaoTituloSecao'] as num).toDouble(),
-      dEspessuraSecao: (json['dEspessuraSecao'] as num).toDouble(),
+      dEspessuraDaSecao: (json['dEspessuraDaSecao'] as num).toDouble(),
       dEspacoEntreSecoes: (json['dEspacoEntreSecoes'] as num).toDouble(),
-      dEspessuraContornoSecao:
-          (json['dEspessuraContornoSecao'] as num).toDouble(),
-      dRaioVazioCentral: (json['dRaioVazioCentral'] as num).toDouble(),
-      dRaioMaximo: (json['dRaioMaximo'] as num).toDouble(),
+      dRaioSecao: (json['dRaioSecao'] as num).toDouble(),
+      dRaioCentral: (json['dRaioCentral'] as num).toDouble(),
+      bAnimacoes: json['bAnimacoes'] as bool,
     );
 
 Map<String, dynamic> _$GraficoTipoPizzaToJson(GraficoTipoPizza instance) =>
     <String, dynamic>{
+      'sTituloSecao': instance.sTituloSecao,
       'dPosicaoTituloSecao': instance.dPosicaoTituloSecao,
-      'dEspessuraSecao': instance.dEspessuraSecao,
+      'dEspessuraDaSecao': instance.dEspessuraDaSecao,
       'dEspacoEntreSecoes': instance.dEspacoEntreSecoes,
-      'dEspessuraContornoSecao': instance.dEspessuraContornoSecao,
-      'dRaioVazioCentral': instance.dRaioVazioCentral,
-      'dRaioMaximo': instance.dRaioMaximo,
+      'dRaioSecao': instance.dRaioSecao,
+      'dRaioCentral': instance.dRaioCentral,
+      'bAnimacoes': instance.bAnimacoes,
     };
 
 GraficoTipoDispersao _$GraficoTipoDispersaoFromJson(

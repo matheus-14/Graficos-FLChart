@@ -1,6 +1,5 @@
 // ignore_for_file: file_names
 
-import 'dart:math';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'CoresAuxiliaresGraficos.dart';
@@ -29,8 +28,8 @@ class ColunaGrafico extends StatefulWidget {
 }
 
 class ColunaGraficoState extends State<ColunaGrafico> {
-  // final Random random = Random();
   int touchedIndex = -1;
+  List<double> tamanhoBarras = [130.0, 220.0, 180.0, 75.0, 100.0, 130.0, 240.0];
 
   @override
   Widget build(BuildContext context) {
@@ -41,7 +40,7 @@ class ColunaGraficoState extends State<ColunaGrafico> {
         child: LayoutBuilder(
           builder: (context, constraints) {
             final barsSpace = constraints.maxWidth / 50;
-            final barsWidth = constraints.maxWidth / 50;
+            final barsWidth = constraints.maxWidth / 40; // empessura das barras
             return Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -63,14 +62,11 @@ class ColunaGraficoState extends State<ColunaGrafico> {
                     ),
                   ],
                 ),
-                const SizedBox(
-                  height: 32,
-                ),
+                // const SizedBox(
+                //   height: 10,
+                // ),
                 Expanded(
-                  child: BarChart(
-                      // mainData(barsWidth, barsSpace),
-                      BarChartData(
-                    maxY: 300.0,
+                  child: BarChart(BarChartData(
                     barTouchData: BarTouchData(
                       enabled: true,
                     ),
@@ -101,9 +97,10 @@ class ColunaGraficoState extends State<ColunaGrafico> {
                       ),
                     ),
                     borderData: FlBorderData(
-                      show: false,
+                      show: false, // mostrar borda do grafico
                     ),
                     gridData: FlGridData(
+                      // configurar grid
                       show: widget.mostrarGrid,
                       drawHorizontalLine: true,
                       horizontalInterval: 50.0,
@@ -118,7 +115,13 @@ class ColunaGraficoState extends State<ColunaGrafico> {
                       // ),
                     ),
                     groupsSpace: barsSpace,
-                    barGroups: mainData(barsWidth, barsSpace),
+                    barGroups: List.generate(
+                        tamanhoBarras.length,
+                        (i) => montarGrupoDeBarras(
+                              i,
+                              tamanhoBarras[i],
+                              barsWidth,
+                            )),
                   )
                       // swapAnimationDuration: const Duration(milliseconds: 500),
                       // swapAnimationCurve: Curves.fastOutSlowIn,
@@ -132,25 +135,25 @@ class ColunaGraficoState extends State<ColunaGrafico> {
     );
   }
 
-  // BarChartGroupData makeGroupData(
-  //   int x,
-  //   double y,
-  //   double barsWidth,
-  // ) {
-  //   return BarChartGroupData(
-  //     x: x,
-  //     barRods: [
-  //       BarChartRodData(
-  //         toY: y,
-  //         color: x >= 2 ? Colors.transparent : widget.barColor,
-  //         borderRadius: BorderRadius.circular(widget.bordaCurvaturaMedia),
-  //         borderDashArray: x >= 5 ? [4, 4] : null,
-  //         width: barsWidth,
-  //         borderSide: BorderSide(color: widget.barColor, width: 2.0),
-  //       ),
-  //     ],
-  //   );
-  // }
+  BarChartGroupData montarGrupoDeBarras(
+    int x,
+    double y,
+    double barsWidth,
+  ) {
+    return BarChartGroupData(
+      x: x,
+      barRods: [
+        BarChartRodData(
+          toY: y,
+          color: x >= 2 ? Colors.yellow[100] : widget.barColor,
+          borderRadius: BorderRadius.circular(widget.bordaCurvaturaMedia),
+          borderDashArray: x >= 5 ? [4, 4] : null,
+          width: barsWidth,
+          borderSide: BorderSide(color: widget.barColor, width: 2.0),
+        ),
+      ],
+    );
+  }
 
   Widget getTitles(double value, TitleMeta meta) {
     const style = TextStyle(
@@ -170,24 +173,5 @@ class ColunaGraficoState extends State<ColunaGrafico> {
       space: 16,
       child: text,
     );
-  }
-
-  List<BarChartGroupData> mainData(double barsWidth, double barsSpace) {
-
-    return [
-      BarChartGroupData(
-        x: x,
-        barRods: [
-          BarChartRodData(
-            toY: y,
-            color: x >= 2 ? Colors.transparent : widget.barColor,
-            borderRadius: BorderRadius.circular(widget.bordaCurvaturaMedia),
-            borderDashArray: x >= 5 ? [4, 4] : null,
-            width: barsWidth,
-            borderSide: BorderSide(color: widget.barColor, width: 2.0),
-          ),
-        ],
-      ),
-    ];
   }
 }

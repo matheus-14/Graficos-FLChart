@@ -2,6 +2,8 @@
 
 import 'dart:convert';
 
+// import 'package:fl_chart/fl_chart.dart';
+// import 'package:flutter/material.dart';
 import 'package:fl_chart_test/funcoes/fJson.dart';
 import 'package:json_annotation/json_annotation.dart';
 
@@ -198,56 +200,56 @@ class GraficoTipoBarra {
 @JsonSerializable(explicitToJson: true)
 class GraficoTipoPizza {
   // List<PieChartSectionData> listaDeSecoes;
-  // TextStyle estiloTitulo;
+  String sTituloSecao; // PieChartSectionData, title
   double dPosicaoTituloSecao; // titlePositionPercentageOffset entre 0 e 1
-  // List<Color> corSecao;
-  double dEspessuraSecao;
+  // List<Color> corDaSecao; // PieChartSectionData, color
+  double dEspessuraDaSecao; // PieChartSectionData, value
+  // BorderSide contornoSecao; // BorderSide, width, color
   double dEspacoEntreSecoes; // sectionsSpace
-  // Color corContornoSecao;
-  double dEspessuraContornoSecao;
-  double dRaioVazioCentral; // centerSpaceRadius
+  double dRaioSecao; // raioSecao
+  double dRaioCentral; // centerSpaceRadius
   // Color corVazioCentral; // centerSpaceColor
-  double dRaioMaximo;
+  bool bAnimacoes;
 
   GraficoTipoPizza({
     // required this.listaDeSecoes,
-    // required this.estiloTitulo,
+    required this.sTituloSecao,
     required this.dPosicaoTituloSecao,
-    // required this.corSecao,
-    required this.dEspessuraSecao,
+    // required this.corDaSecao,
+    required this.dEspessuraDaSecao,
+    // required this.contornoSecao,
     required this.dEspacoEntreSecoes,
-    // required this.corContornoSecao,
-    required this.dEspessuraContornoSecao,
-    required this.dRaioVazioCentral,
+    required this.dRaioSecao,
+    required this.dRaioCentral,
     // required this.corVazioCentral,
-    required this.dRaioMaximo,
+    required this.bAnimacoes,
   });
 
   GraficoTipoPizza copyWith({
     // List<PieChartSectionData>? listaDeSecoes,
-    // TextStyle? estiloTitulo,
+    String? sTituloSecao,
     double? dPosicaoTituloSecao,
-    // List<Color>? corSecao,
-    double? dEspessuraSecao,
-    double? dEspacoEntreSecoes, // sectionsSpace
-    // Color? corContornoSecao,
-    double? dEspessuraContornoSecao,
-    double? dRaioVazioCentral, // centerSpaceRadius
-    // Color? corVazioCentral, // centerSpaceColor
-    double? dRaioMaximo,
+    // List<Color>? corDaSecao,
+    double? dEspessuraDaSecao,
+    // BorderSide? contornoSecao,
+    double? dEspacoEntreSecoes,
+    double? dRaioSecao,
+    double? dRaioCentral,
+    // Color? corVazioCentral,
+    bool? bAnimacoes,
   }) {
     return GraficoTipoPizza(
       // listaDeSecoes: listaDeSecoes ?? this.listaDeSecoes,
-      // estiloTitulo: estiloTitulo ?? this.estiloTitulo,
+      sTituloSecao: sTituloSecao ?? this.sTituloSecao,
       dPosicaoTituloSecao: dPosicaoTituloSecao ?? this.dPosicaoTituloSecao,
-      // corSecao: corSecao ?? this.corSecao,
-      dEspessuraSecao: dEspessuraSecao ?? this.dEspessuraSecao,
+      // corDaSecao: corDaSecao ?? this.corDaSecao,
+      dEspessuraDaSecao: dEspessuraDaSecao ?? this.dEspessuraDaSecao,
+      // contornoSecao: contornoSecao ?? this.contornoSecao,
       dEspacoEntreSecoes: dEspacoEntreSecoes ?? this.dEspacoEntreSecoes,
-      // corContornoSecao: corContornoSecao ?? this.corContornoSecao,
-      dEspessuraContornoSecao: dEspessuraContornoSecao ?? this.dEspessuraContornoSecao,
-      dRaioVazioCentral: dRaioVazioCentral ?? this.dRaioVazioCentral,
+      dRaioSecao: dRaioSecao ?? this.dRaioSecao,
+      dRaioCentral: dRaioCentral ?? this.dRaioCentral,
       // corVazioCentral: corVazioCentral ?? this.corVazioCentral,
-      dRaioMaximo: dRaioMaximo ?? this.dRaioMaximo,
+      bAnimacoes: bAnimacoes ?? this.bAnimacoes,
     );
   }
 

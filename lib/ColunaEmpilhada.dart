@@ -14,13 +14,46 @@ class ColunaEmpilhada extends StatefulWidget {
   final double bordaCurvaturaMedia = 8;
   final double bordaCurva = 16;
 
+  // List<Color> listaCoresBarras;
+  // List<double> listaTamanhoBarras;
+  // Icon iconeDoTitulo;
+  // Color corDoIcone;
+  // String sTituloGeral;
+  // Color corTituloGeral;
+  // int iTamanhoTituloGeral;
+  // Color corDeFundo;
+  // bool bMostrarInformacoesAoInteragirMouse;
+  // double dEspacoEntreBarras;
+  // bool bIsEmpilhada;
+  // bool bIsColunas;
+  // bool bAnimacoes;
+  // double dCurvaturaPonta;
+
+  // int iTamanhoReservadoTituloBottom;
+  // int iTamanhoFonteDoTitulo;
+  // bool bMostrarTitulos;
+  // List<String> lTitulosEsquerda;
+  // List<String> lTitulosBottom;
+  // Color corTitulosEsquerda;
+  // Color corTitulosBottom;
+  // bool bMostrarBorda;
+  // Color corDaBorda;
+  // bool bMostarGrid;
+  // bool bMostarGridVertical;
+  // bool bMostarGridHorizontal;
+  // bool bMostrarNumerosGridDireita;
+  // bool bMostrarNumerosGridEsquerda;
+  // bool bMostrarNumerosGridTopo;
+  // bool bMostrarNumerosGridBottom;
+  // int iEspessuraLinhaDoGrid;
+
   @override
   State<StatefulWidget> createState() => ColunaEmpilhadaState();
 }
 
 class ColunaEmpilhadaState extends State<ColunaEmpilhada> {
   Widget bottomTitles(double value, TitleMeta meta) {
-    const style = TextStyle(fontSize: 10);
+    const style = TextStyle(fontSize: 15);
     String text;
     switch (value.toInt()) {
       case 0:
@@ -67,15 +100,16 @@ class ColunaEmpilhadaState extends State<ColunaEmpilhada> {
   @override
   Widget build(BuildContext context) {
     return AspectRatio(
-      aspectRatio: 1.66,
+      aspectRatio: 1,
       child: Padding(
         padding: const EdgeInsets.only(top: 16),
         child: LayoutBuilder(
           builder: (context, constraints) {
-            final barsSpace = constraints.maxWidth;
-            final barsWidth = constraints.maxWidth / 35;
+            final dBarsSpace = constraints.maxWidth;
+            final dBarsWidth = constraints.maxWidth / 35;
             return BarChart(
               BarChartData(
+                backgroundColor: Colors.transparent,
                 alignment: BarChartAlignment.center,
                 barTouchData: BarTouchData(
                   enabled: true,
@@ -114,8 +148,8 @@ class ColunaEmpilhadaState extends State<ColunaEmpilhada> {
                 borderData: FlBorderData(
                   show: false,
                 ),
-                groupsSpace: barsSpace,
-                barGroups: mainData(barsWidth, barsSpace),
+                groupsSpace: dBarsSpace,
+                barGroups: mainData(dBarsWidth, dBarsSpace),
               ),
             );
           },
@@ -124,21 +158,35 @@ class ColunaEmpilhadaState extends State<ColunaEmpilhada> {
     );
   }
 
-  List<BarChartGroupData> mainData(double barsWidth, double barsSpace) {
+  List<BarChartGroupData> mainData(double dBarsWidth, double dBarsSpace) {
+    Map<int, List<double>> data = {
+      0: [20000, 100000, 50000],
+      1: [110000, 70000, 130000],
+      2: [60000, 170000, 110000],
+      3: [15000, 105000, 20000],
+    };
+
+    List<double> totalSomaBarrasEmpilhadas = [];
+
+    data.forEach((key, value) {
+      double soma = value.fold(0, (valorAnterior, elemento) => valorAnterior + elemento);
+      totalSomaBarrasEmpilhadas.add(soma);
+    });
+
     return [
       BarChartGroupData(
         x: 0,
-        barsSpace: barsSpace,
+        barsSpace: dBarsSpace,
         barRods: [
           BarChartRodData(
-            toY: 17000000000,
+            toY: totalSomaBarrasEmpilhadas[0],
             rodStackItems: [
-              BarChartRodStackItem(0, 2000000000, widget.dark),
-              BarChartRodStackItem(2000000000, 12000000000, widget.normal),
-              BarChartRodStackItem(12000000000, 17000000000, widget.light),
+              BarChartRodStackItem(0, data[0]![0], widget.dark),
+              BarChartRodStackItem(data[0]![0], data[0]![0] + data[0]![1], widget.normal),
+              BarChartRodStackItem(data[0]![0] + data[0]![1], (data[0]![0] + data[0]![1]) + data[0]![2], widget.light),
             ],
             borderRadius: BorderRadius.circular(widget.bordaCurvaturaMedia),
-            width: barsWidth,
+            width: dBarsWidth,
           ),
           // BarChartRodData(
           //   toY: 24000000000,
@@ -148,7 +196,7 @@ class ColunaEmpilhadaState extends State<ColunaEmpilhada> {
           //     BarChartRodStackItem(14000000000, 24000000000, widget.light),
           //   ],
           //   borderRadius: BorderRadius.circular(widget.bordaCurvaturaMedia),
-          //   width: barsWidth,
+          //   width: dBarsWidth,
           // ),
           // BarChartRodData(
           //   toY: 23000000000.5,
@@ -158,7 +206,7 @@ class ColunaEmpilhadaState extends State<ColunaEmpilhada> {
           //     BarChartRodStackItem(18000000000, 23000000000.5, widget.light),
           //   ],
           //   borderRadius: BorderRadius.circular(widget.bordaCurvaturaMedia),
-          //   width: barsWidth,
+          //   width: dBarsWidth,
           // ),
           // BarChartRodData(
           //   toY: 29000000000,
@@ -168,7 +216,7 @@ class ColunaEmpilhadaState extends State<ColunaEmpilhada> {
           //     BarChartRodStackItem(15000000000, 29000000000, widget.light),
           //   ],
           //   borderRadius: BorderRadius.circular(widget.bordaCurvaturaMedia),
-          //   width: barsWidth,
+          //   width: dBarsWidth,
           // ),
           // BarChartRodData(
           //   toY: 32000000000,
@@ -178,23 +226,23 @@ class ColunaEmpilhadaState extends State<ColunaEmpilhada> {
           //     BarChartRodStackItem(17000000000.5, 32000000000, widget.light),
           //   ],
           //   borderRadius: BorderRadius.circular(widget.bordaCurvaturaMedia),
-          //   width: barsWidth,
+          //   width: dBarsWidth,
           // ),
         ],
       ),
       BarChartGroupData(
         x: 1,
-        barsSpace: barsSpace,
+        barsSpace: dBarsSpace,
         barRods: [
           BarChartRodData(
-            toY: 31000000000,
+            toY: totalSomaBarrasEmpilhadas[1],
             rodStackItems: [
-              BarChartRodStackItem(0, 11000000000, widget.dark),
-              BarChartRodStackItem(11000000000, 18000000000, widget.normal),
-              BarChartRodStackItem(18000000000, 31000000000, widget.light),
+              BarChartRodStackItem(0, data[1]![0], widget.dark),
+              BarChartRodStackItem(data[1]![0], data[1]![0] + data[1]![1], widget.normal),
+              BarChartRodStackItem(data[1]![0] + data[1]![1], (data[1]![0] + data[1]![1]) + data[1]![2], widget.light),
             ],
             borderRadius: BorderRadius.circular(widget.bordaCurvaturaMedia),
-            width: barsWidth,
+            width: dBarsWidth,
           ),
           // BarChartRodData(
           //   toY: 35000000000,
@@ -204,7 +252,7 @@ class ColunaEmpilhadaState extends State<ColunaEmpilhada> {
           //     BarChartRodStackItem(27000000000, 35000000000, widget.light),
           //   ],
           //   borderRadius: BorderRadius.circular(widget.bordaCurvaturaMedia),
-          //   width: barsWidth,
+          //   width: dBarsWidth,
           // ),
           // BarChartRodData(
           //   toY: 31000000000,
@@ -214,7 +262,7 @@ class ColunaEmpilhadaState extends State<ColunaEmpilhada> {
           //     BarChartRodStackItem(24000000000, 31000000000, widget.light),
           //   ],
           //   borderRadius: BorderRadius.circular(widget.bordaCurvaturaMedia),
-          //   width: barsWidth,
+          //   width: dBarsWidth,
           // ),
           // BarChartRodData(
           //   toY: 15000000000,
@@ -224,7 +272,7 @@ class ColunaEmpilhadaState extends State<ColunaEmpilhada> {
           //     BarChartRodStackItem(12000000000.5, 15000000000, widget.light),
           //   ],
           //   borderRadius: BorderRadius.circular(widget.bordaCurvaturaMedia),
-          //   width: barsWidth,
+          //   width: dBarsWidth,
           // ),
           // BarChartRodData(
           //   toY: 17000000000,
@@ -234,23 +282,23 @@ class ColunaEmpilhadaState extends State<ColunaEmpilhada> {
           //     BarChartRodStackItem(15000000000, 17000000000, widget.light),
           //   ],
           //   borderRadius: BorderRadius.circular(widget.bordaCurvaturaMedia),
-          //   width: barsWidth,
+          //   width: dBarsWidth,
           // ),
         ],
       ),
       BarChartGroupData(
         x: 2,
-        barsSpace: barsSpace,
+        barsSpace: dBarsSpace,
         barRods: [
           BarChartRodData(
-            toY: 34000000000,
+            toY: totalSomaBarrasEmpilhadas[2],
             rodStackItems: [
-              BarChartRodStackItem(0, 6000000000, widget.dark),
-              BarChartRodStackItem(6000000000, 23000000000, widget.normal),
-              BarChartRodStackItem(23000000000, 34000000000, widget.light),
+              BarChartRodStackItem(0, data[2]![0], widget.dark),
+              BarChartRodStackItem(data[2]![0], data[2]![0] + data[2]![1], widget.normal),
+              BarChartRodStackItem(data[2]![0] + data[2]![1], (data[2]![0] + data[2]![1]) + data[2]![2], widget.light),
             ],
             borderRadius: BorderRadius.circular(widget.bordaCurvaturaMedia),
-            width: barsWidth,
+            width: dBarsWidth,
           ),
           // BarChartRodData(
           //   toY: 32000000000,
@@ -260,7 +308,7 @@ class ColunaEmpilhadaState extends State<ColunaEmpilhada> {
           //     BarChartRodStackItem(24000000000, 32000000000, widget.light),
           //   ],
           //   borderRadius: BorderRadius.circular(widget.bordaCurvaturaMedia),
-          //   width: barsWidth,
+          //   width: dBarsWidth,
           // ),
           // BarChartRodData(
           //   toY: 14000000000.5,
@@ -270,7 +318,7 @@ class ColunaEmpilhadaState extends State<ColunaEmpilhada> {
           //     BarChartRodStackItem(12000000000, 14000000000.5, widget.light),
           //   ],
           //   borderRadius: BorderRadius.circular(widget.bordaCurvaturaMedia),
-          //   width: barsWidth,
+          //   width: dBarsWidth,
           // ),
           // BarChartRodData(
           //   toY: 20000000000,
@@ -280,7 +328,7 @@ class ColunaEmpilhadaState extends State<ColunaEmpilhada> {
           //     BarChartRodStackItem(15000000000, 20000000000, widget.light),
           //   ],
           //   borderRadius: BorderRadius.circular(widget.bordaCurvaturaMedia),
-          //   width: barsWidth,
+          //   width: dBarsWidth,
           // ),
           // BarChartRodData(
           //   toY: 24000000000,
@@ -290,24 +338,25 @@ class ColunaEmpilhadaState extends State<ColunaEmpilhada> {
           //     BarChartRodStackItem(15000000000, 24000000000, widget.light),
           //   ],
           //   borderRadius: BorderRadius.circular(widget.bordaCurvaturaMedia),
-          //   width: barsWidth,
+          //   width: dBarsWidth,
           // ),
         ],
       ),
       BarChartGroupData(
         x: 3,
-        barsSpace: barsSpace,
+        barsSpace: dBarsSpace,
         barRods: [
           BarChartRodData(
-            toY: 14000000000,
+            toY: totalSomaBarrasEmpilhadas[3],
             rodStackItems: [
-              BarChartRodStackItem(0, 1000000000.5, widget.dark),
-              BarChartRodStackItem(1000000000.5, 12000000000, widget.normal),
-              BarChartRodStackItem(12000000000, 14000000000, widget.light),
+              BarChartRodStackItem(0, data[3]![0], widget.dark),
+              BarChartRodStackItem(data[3]![0], data[3]![0] + data[3]![1], widget.normal),
+              BarChartRodStackItem(data[3]![0] + data[3]![1], (data[3]![0] + data[3]![1]) + data[3]![2], widget.light),
             ],
             borderRadius: BorderRadius.circular(widget.bordaCurvaturaMedia),
-            width: barsWidth,
+            width: dBarsWidth,
           ),
+
           // BarChartRodData(
           //   toY: 27000000000,
           //   rodStackItems: [
@@ -316,7 +365,7 @@ class ColunaEmpilhadaState extends State<ColunaEmpilhada> {
           //     BarChartRodStackItem(25000000000, 27000000000, widget.light),
           //   ],
           //   borderRadius: BorderRadius.circular(widget.bordaCurvaturaMedia),
-          //   width: barsWidth,
+          //   width: dBarsWidth,
           // ),
           // BarChartRodData(
           //   toY: 29000000000,
@@ -326,7 +375,7 @@ class ColunaEmpilhadaState extends State<ColunaEmpilhada> {
           //     BarChartRodStackItem(23000000000, 29000000000, widget.light),
           //   ],
           //   borderRadius: BorderRadius.circular(widget.bordaCurvaturaMedia),
-          //   width: barsWidth,
+          //   width: dBarsWidth,
           // ),
           // BarChartRodData(
           //   toY: 16000000000.5,
@@ -336,7 +385,7 @@ class ColunaEmpilhadaState extends State<ColunaEmpilhada> {
           //     BarChartRodStackItem(15000000000, 16000000000.5, widget.light),
           //   ],
           //   borderRadius: BorderRadius.circular(widget.bordaCurvaturaMedia),
-          //   width: barsWidth,
+          //   width: dBarsWidth,
           // ),
           // BarChartRodData(
           //   toY: 15000000000,
@@ -346,7 +395,7 @@ class ColunaEmpilhadaState extends State<ColunaEmpilhada> {
           //     BarChartRodStackItem(12000000000.5, 15000000000, widget.light),
           //   ],
           //   borderRadius: BorderRadius.circular(widget.bordaCurvaturaMedia),
-          //   width: barsWidth,
+          //   width: dBarsWidth,
           // ),
         ],
       ),
